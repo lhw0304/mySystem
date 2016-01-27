@@ -1,2 +1,3 @@
 rootProject.name = 'mySystem'
 
+include  "core" , "merchant"
