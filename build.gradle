@@ -1,89 +1,159 @@
-group 'mySystem'
-version '1.0'
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven'
+    apply plugin: 'idea'
+    apply plugin: 'eclipse'
 
-apply plugin: 'java'
-apply plugin: 'war'
-apply plugin: 'maven'
-apply plugin: 'idea'
-apply plugin: 'eclipse'
+    archivesBaseName = 'MySystem'
+    group = 'bank'
+    version = '1.0'
 
-sourceCompatibility = 1.5
+    // Global settings 
+    ext {
+        // dependencies library verions
+        junitVersion = '4.11'
+        springVersion = '4.2.3.RELEASE'
+        securityVersion = '3.2.5.RELEASE'
+        jacksonVersion = '2.5.3'
+        servletVersion = '3.1.0'
+        mysqlVersion = '5.1.36'
+        mybatisVersion = '3.2.8'
+        mybatisSpringVersion = '1.2.3'
+        druidVersion = '1.0.15'
+        log4jVersion = '1.2.17'
+        slf4jVersion = '1.7.12'
+        apnsVersion = '1.0.0.Beta6'
+        ossVersion = '2.0.5'
+        mahoutVersion = '0.11.0'
+        hamcrestVersion = '1.3'
+        mockitoVersion = '1.10.19'
+        jsonpathVersion = '0.8.1'
+        elasticSearchVersion = '1.7.1'
+        dom4jVersion = '1.6.1'
+        httpclientVersion = '3.1'
+        jpushVersion = '3.2.7'
+        guavaVersion = '18.0'
+        gsonVersion = '2.3.1'
+        jjwtVersion = '0.6.0'
+        jerseyVersion = '1.19'
 
-repositories {
-    mavenLocal()
-    mavenCentral()
-}
+        sharedManifest = manifest {
+            attributes 'Implementation-Title': "${project.name}",
+                    'Implementation-Version': "${version}",
+                    'Implementation-Vendor': 'NEAU',
+                    'Built-By': 'WK',
+                    'Built-Date': new Date().getDateTimeString(),
+                    'Built-With': "gradle-${project.getGradle().getGradleVersion()}, groovy-${GroovySystem.getVersion()}",
+                    'Created-By': 'Java ' + System.getProperty('java.version') + ' (' + System.getProperty('java.vendor') + ')'
+        }
+    }
 
-ext {
-    // dependencies library verions
-    junitVersion = '4.11'
-    springVersion = '4.2.3.RELEASE'
-    securityVersion = '3.2.5.RELEASE'
-    jacksonVersion = '2.5.3'
-    servletVersion = '3.1.0'
-    mysqlVersion = '5.1.36'
-    mybatisVersion = '3.2.8'
-    mybatisSpringVersion = '1.2.3'
-    druidVersion = '1.0.15'
-    log4jVersion = '1.2.17'
-    slf4jVersion = '1.7.12'
-    apnsVersion = '1.0.0.Beta6'
-    ossVersion = '2.0.5'
-    mahoutVersion = '0.11.0'
-    hamcrestVersion = '1.3'
-    mockitoVersion = '1.10.19'
-    jsonpathVersion = '0.8.1'
-    elasticSearchVersion = '1.7.1'
-    dom4jVersion = '1.6.1'
-    httpclientVersion = '3.1'
-    jpushVersion = '3.2.7'
-    guavaVersion = '18.0'
-    gsonVersion = '2.3.1'
-    jjwtVersion = '0.6.0'
-    jerseyVersion = '1.19'
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
 
-    sharedManifest = manifest {
-        attributes 'Implementation-Title': "${project.name}",
-                'Implementation-Version': "${version}",
-                'Implementation-Vendor': '',
-                'Built-By': 'Wang kang',
-                'Built-Date': new Date().getDateTimeString(),
-                'Built-With': "gradle-${project.getGradle().getGradleVersion()}, groovy-${GroovySystem.getVersion()}",
-                'Created-By': 'Java ' + System.getProperty('java.version') + ' (' + System.getProperty('java.vendor') + ')'
+    // Settings for the compile task
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = '1.7'
+        targetCompatibility = '1.7'
+        options.encoding = 'UTF-8'
+        options.debug = true
+        options.compilerArgs << "-Xlint:unchecked"
+        options.compilerArgs << "-Xlint:deprecation"
+    }
+
+    // Config servlet container for war projects
+    configure([project(":admin")]) {
+
+
+        // Add the gretty plugin for running/deploying war against jetty or tomcat
+        apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+
+        // Servlet container specific settings
+        gretty {
+            httpPort = 8080
+            contextPath = '/'
+            servletContainer = 'tomcat8'
+            scanInterval = 600 // Hot-deployment scan interval, in seconds.
+        }
+
+        // Replace jdbc, log4j tokens with env specific settings
+        processResources {
+            def env = project.hasProperty('env') ? env : 'local'
+            def configFile = file("${rootProject.projectDir}/config.groovy")
+            def envProp = new ConfigSlurper("${env}").parse(configFile.toURL()).toProperties()
+
+            from(sourceSets.main.resources.srcDirs) {
+                filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: envProp)
+            }
+        }
     }
 }
-dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-    compile "org.springframework:spring-context:${springVersion}"
-    compile "org.springframework.security:spring-security-web:${securityVersion}"
-    compile "org.springframework.security:spring-security-config:${securityVersion}"
-    compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
-    compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
-    compile "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
-    compile "javax.servlet:javax.servlet-api:${servletVersion}"
-    compile "org.mybatis:mybatis:${mybatisVersion}"
 
-    testCompile "org.mybatis:mybatis-spring:${mybatisSpringVersion}"
-    testCompile "org.springframework:spring-jdbc:${springVersion}"
-    testCompile "org.springframework:spring-tx:${springVersion}"
-    testCompile "mysql:mysql-connector-java:${mysqlVersion}"
+project(':core') {
 
-    compile "org.springframework:spring-webmvc:${springVersion}"
-    compile "org.springframework:spring-jdbc:${springVersion}"
-    compile "org.springframework:spring-tx:${springVersion}"
-    compile "log4j:log4j:${log4jVersion}"
-    compile "org.slf4j:slf4j-api:${slf4jVersion}"
-    compile "org.slf4j:slf4j-log4j12:${slf4jVersion}"
-    compile "com.alibaba:druid:${druidVersion}"
-    compile "org.mybatis:mybatis-spring:${mybatisSpringVersion}"
-    compile "mysql:mysql-connector-java:${mysqlVersion}"
-    compile "dom4j:dom4j:${dom4jVersion}"
-    compile "commons-httpclient:commons-httpclient:${httpclientVersion}"
+    // create a single Jar without dependencies
+    jar {
+        classifier = 'core'
+        manifest = sharedManifest
+    }
 
-    testCompile "junit:junit:${junitVersion}"
-    testCompile "org.hamcrest:hamcrest-all:${hamcrestVersion}"
-    testCompile "org.mockito:mockito-core:${mockitoVersion}"
-    testCompile "org.springframework:spring-test:${springVersion}"
-    testCompile "com.jayway.jsonpath:json-path:${jsonpathVersion}"
-    testCompile "com.jayway.jsonpath:json-path-assert:${jsonpathVersion}"
+    // create a single Jar with all dependencies
+    task fatJar(type: Jar) {
+        from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+        classifier = 'core'
+        manifest = sharedManifest
+    }
+
+    dependencies {
+        compile "org.springframework:spring-context:${springVersion}"
+        compile "org.springframework.security:spring-security-web:${securityVersion}"
+        compile "org.springframework.security:spring-security-config:${securityVersion}"
+        compile "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}"
+        compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+        compile "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
+        compile "javax.servlet:javax.servlet-api:${servletVersion}"
+        compile "org.mybatis:mybatis:${mybatisVersion}"
+        compile "com.aliyun.oss:aliyun-sdk-oss:${ossVersion}"
+        compile "io.jsonwebtoken:jjwt:${jjwtVersion}"
+
+        testCompile "org.mybatis:mybatis-spring:${mybatisSpringVersion}"
+        testCompile "org.springframework:spring-jdbc:${springVersion}"
+        testCompile "org.springframework:spring-tx:${springVersion}"
+        testCompile "mysql:mysql-connector-java:${mysqlVersion}"
+    }
+}
+
+project(':admin'){
+
+    apply plugin: 'war'
+
+    war {
+        classifier = 'admin'
+        manifest = sharedManifest
+    }
+
+    dependencies {
+        compile project(':core')
+        compile "org.springframework:spring-webmvc:${springVersion}"
+        compile "org.mybatis:mybatis-spring:${mybatisSpringVersion}"
+        compile "org.springframework:spring-jdbc:${springVersion}"
+        compile "org.springframework:spring-tx:${springVersion}"
+        compile "log4j:log4j:${log4jVersion}"
+        compile "org.slf4j:slf4j-api:${slf4jVersion}"
+        compile "org.slf4j:slf4j-log4j12:${slf4jVersion}"
+        compile "com.alibaba:druid:${druidVersion}"
+        compile "mysql:mysql-connector-java:${mysqlVersion}"
+        compile "com.sun.jersey:jersey-core:${jerseyVersion}"
+        compile "com.sun.jersey:jersey-client:${jerseyVersion}"
+        compile "com.sun.jersey.contribs:jersey-multipart:${jerseyVersion}"
+
+        testCompile "junit:junit:${junitVersion}"
+        testCompile "org.hamcrest:hamcrest-all:${hamcrestVersion}"
+        testCompile "org.mockito:mockito-core:${mockitoVersion}"
+        testCompile "org.springframework:spring-test:${springVersion}"
+        testCompile "com.jayway.jsonpath:json-path:${jsonpathVersion}"
+        testCompile "com.jayway.jsonpath:json-path-assert:${jsonpathVersion}"
+    }
 }
