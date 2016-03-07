@@ -37,13 +37,13 @@ public class SingleSelectServiceImpl implements SingleSelectService{
             singleSelect.setCtime(now);
             Integer success = singleSelectDAO.createSingleSelect(singleSelect);
             if(success == 0 || success == null) {
-                res.setMessage(Message.FAILURE);
+                res.setMessage(Message.DATABASE);
                 return res;
             }
             res.setMessage(Message.SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
-            res.setMessage(Message.FAILURE);
+            res.setMessage(Message.CATCH);
             return res;
         }
         return res;
@@ -55,7 +55,7 @@ public class SingleSelectServiceImpl implements SingleSelectService{
         try {
             SingleSelect singleSelect = singleSelectDAO.getSingleSelect(id);
             if (singleSelect == null) {
-                res.setMessage(Message.NO_MORE_SINGLE_SELECT);
+                res.setMessage(Message.DATABASE);
                 return res;
             }
             Map<String,Object> payload = new HashMap<>();
@@ -64,7 +64,7 @@ public class SingleSelectServiceImpl implements SingleSelectService{
             res.setPayload(payload);
         } catch (Exception e) {
             e.printStackTrace();
-            res.setMessage(Message.FAILURE);
+            res.setMessage(Message.CATCH);
             return res;
         }
         return res;
@@ -76,13 +76,13 @@ public class SingleSelectServiceImpl implements SingleSelectService{
         try{
             Integer success = singleSelectDAO.deleteSingleSelect(id);
             if(success == null || success == 0) {
-                res.setMessage(Message.FAILURE);
+                res.setMessage(Message.DATABASE);
                 return res;
             }
             res.setMessage(Message.SUCCESS);
         } catch (Exception e) {
             e.printStackTrace();
-            res.setMessage(Message.FAILURE);
+            res.setMessage(Message.CATCH);
         }
         return res;
     }
@@ -93,7 +93,7 @@ public class SingleSelectServiceImpl implements SingleSelectService{
         try{
             List<SingleSelect> list = singleSelectDAO.getSingleSelectListByUserId(userId, limit, offset);
             if (list.isEmpty()) {
-                res.setMessage(Message.NO_MORE_SINGLE_SELECT);
+                res.setMessage(Message.DATABASE);
                 return res;
             }
             Integer total = singleSelectDAO.countSingleSelect(userId);
@@ -104,7 +104,7 @@ public class SingleSelectServiceImpl implements SingleSelectService{
             res.setPayload(payload);
         } catch (Exception e) {
             e.printStackTrace();
-            res.setMessage(Message.FAILURE);
+            res.setMessage(Message.CATCH);
         }
         return res;
     }
