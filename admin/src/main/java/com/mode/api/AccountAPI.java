@@ -38,13 +38,6 @@ public class AccountAPI {
         return res;
     }
 
-    @RequestMapping(value = "/merchants", method = RequestMethod.GET)
-    public Response listMerchant() {
-        Response res = accountService.listMerchant();
-        logger.info("/v2/merchants,{}", res.getMessage());
-        return res;
-    }
-
     @RequestMapping(value = "/stylist", method = RequestMethod.POST)
     public Response createStylistAccount(@RequestHeader(value = "email") String email,
                                          @RequestHeader(value = "password") String password,
@@ -59,7 +52,7 @@ public class AccountAPI {
         logger.info("/v2/stylist",res.getMessage());
         return res;
     }
-    
+
     @RequestMapping(value = "/accountInformation", method = RequestMethod.GET)
     public Response getAccountInformation(@RequestParam(value = "userId",required = false) Integer
                                                   userId,

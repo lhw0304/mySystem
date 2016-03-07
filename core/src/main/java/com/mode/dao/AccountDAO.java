@@ -104,44 +104,6 @@ public interface AccountDAO {
     public Integer checkMerchant(@Param("userId") Integer userId,
                                  @Param("unLock") Integer unLock);
 
-    /**
-     * list account to check
-     *
-     * @return
-     */
-    @Select("SELECT * FROM md_account WHERE locked = 1")
-    @Results({
-            @Result(property = "userId", column = "user_id"),
-            @Result(property = "username", column = "username"),
-            @Result(property = "password", column = "password"),
-            @Result(property = "ctime", column = "ctime"),
-            @Result(property = "utime", column = "utime"),
-            @Result(property = "locked", column = "locked"),
-            @Result(property = "accessToken", column = "access_token"),
-            @Result(property = "role", column = "role"),
-            @Result(property = "status", column = "status"),
-            @Result(property = "expireTime", column = "expire_time")})
-    public List<Account> listMerchant();
-
-    /**
-     * list account to check
-     *
-     * @return
-     */
-    @Select("SELECT * FROM md_account WHERE role like '%STYLIST%'")
-    @Results({
-            @Result(property = "userId", column = "user_id"),
-            @Result(property = "username", column = "username"),
-            @Result(property = "password", column = "password"),
-            @Result(property = "ctime", column = "ctime"),
-            @Result(property = "utime", column = "utime"),
-            @Result(property = "locked", column = "locked"),
-            @Result(property = "accessToken", column = "access_token"),
-            @Result(property = "role", column = "role"),
-            @Result(property = "status", column = "status"),
-            @Result(property = "expireTime", column = "expire_time")})
-    public List<Account> listStylists();
-
 
     @Update("UPDATE md_account " +
             "SET password = #{password} " +
@@ -150,25 +112,11 @@ public interface AccountDAO {
                                   @Param("password") String password);
 
 
-    /**
-     * List user id of some role
-     *
-     * @param role
-     * @return
-     */
-    @Select("SELECT user_id FROM md_account WHERE role like #{role} ")
-    public List<Integer> listUserIdOfSomeRole(@Param("role") String role);
 
 
     @Update("UPDATE md_account SET role = #{role} WHERE user_id = #{userId}")
     public Integer updateUserRole(@Param("userId") Integer userId,
                                   @Param("role") String role);
 
-    @Select("SELECT username FROM md_account " +
-            "WHERE role = 'USER' " +
-            "AND user_id > #{startUserId} AND user_id < #{endUserId} " +
-            "AND username LIKE #{emailPattern} ")
-    public List<String> listUsername(@Param("startUserId") String startUserId,
-                                     @Param("endUserId") String endUserId,
-                                     @Param("emailPattern") String emailPattern);
+
 }

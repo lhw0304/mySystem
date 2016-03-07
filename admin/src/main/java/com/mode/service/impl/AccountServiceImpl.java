@@ -109,20 +109,6 @@ public class AccountServiceImpl implements AccountService {
         return res;
     }
 
-    public Response listMerchant() {
-        Response res = new Response();
-        List<Account> accounts = accountDAO.listMerchant();
-        if (accounts == null || accounts.isEmpty()) {
-            res.setMessage(Message.FAILURE);
-            return res;
-        }
-        Map<String, Object> payload = new HashMap<String, Object>();
-        payload.put("accounts", accounts);
-        res.setPayload(payload);
-        res.setMessage(Message.SUCCESS);
-        return res;
-    }
-
     public Response createStylistAccount(String email, String password,String name, String role,
                                          Integer level, String country){
         Response res = new Response();
