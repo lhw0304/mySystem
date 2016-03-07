@@ -8,7 +8,7 @@ subprojects {
     group = 'bank'
     version = '1.0'
 
-    // Global settings 
+    // Global settings
     ext {
         // dependencies library verions
         junitVersion = '4.11'
@@ -68,7 +68,9 @@ subprojects {
 
 
         // Add the gretty plugin for running/deploying war against jetty or tomcat
-        apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+        apply from:
+                'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+
 
         // Servlet container specific settings
         gretty {
@@ -82,7 +84,8 @@ subprojects {
         processResources {
             def env = project.hasProperty('env') ? env : 'local'
             def configFile = file("${rootProject.projectDir}/config.groovy")
-            def envProp = new ConfigSlurper("${env}").parse(configFile.toURL()).toProperties()
+            def envProp = new ConfigSlurper("${env}").parse(configFile.toURL
+                    ()).toProperties()
 
             from(sourceSets.main.resources.srcDirs) {
                 filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: envProp)

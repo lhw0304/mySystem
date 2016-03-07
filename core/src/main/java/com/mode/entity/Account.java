@@ -11,7 +11,6 @@ public class Account {
     private String accessToken;
     private Long expireTime;
     private String role;
-    private Integer status;
 
     public Integer getUserId() {
         return userId;
@@ -85,14 +84,6 @@ public class Account {
         this.role = role;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     @Override
     public String toString() {
         return "Account{" +
@@ -105,7 +96,6 @@ public class Account {
                 ", accessToken='" + accessToken + '\'' +
                 ", expireTime=" + expireTime +
                 ", role='" + role + '\'' +
-                ", status=" + status +
                 '}';
     }
 }
