@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * Created by Administrator on 2016/3/7.
  */
 @RestController
-@RequestMapping("/v2/singleselect/")
+@RequestMapping("/singleselect/")
 public class SingleSelectAPI {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -32,7 +32,7 @@ public class SingleSelectAPI {
         return res;
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public Response deleteSingleSelect(@RequestHeader(value = "id") Integer id) {
         Response res = singleSelectService.deleteSingleSelect(id);
         logger.info("v2/singleselect/delete/{id},{}",res.getMessage());

@@ -14,7 +14,11 @@ public class Message {
     public static final Message USER_NOT_EXIST = new Message(4, "This user does not exist");
     public static final Message ERROR_CREATE_ACCOUNT = new Message(5, "An error occurred while creating account");
     public static final Message NO_MORE_SINGLE_SELECT = new Message(6, "No more single select");
-    public static final Message CATCH = new Message(7, "catch error");
+    public static final Message NO_MORE_CHECK = new Message(7, "No more single select");
+    public static final Message NO_MORE_MULTI_SELECT = new Message(8, "No more single select");
+    public static final Message NO_MORE_COMPLETION_SELECT = new Message(9, "No more single select");
+    public static final Message CATCH = new Message(21, "catch error");
+    public static final Message NOT_MATCH = new Message(22, "match error");
 
     /* Some http status codes and corresponding descriptions. */
     public static final Message UNAUTHORIZED = new Message(401, "Unauthorized to access");

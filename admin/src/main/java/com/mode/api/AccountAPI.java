@@ -15,7 +15,7 @@ import com.mode.service.AccountService;
 
 
 @RestController
-@RequestMapping("/v2")
+@RequestMapping("/account")
 public class AccountAPI {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
