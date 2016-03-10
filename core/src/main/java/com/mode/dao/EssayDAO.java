@@ -1,35 +1,35 @@
 package com.mode.dao;
 
-import com.mode.entity.ShortAnswer;
+import com.mode.entity.Essay;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
 /**
- * Created by Administrator on 2016/3/8.
+ * Created by Administrator on 2016/3/10.
  */
-public interface ShortAnswerDAO {
+public interface EssayDAO {
 
-    @Insert("INSERT INTO md_short_answer(user_id,content,answer,ctime) VALUES(#{userId},#{content}," +
+    @Insert("INSERT INTO md_essay(user_id,content,answer,ctime) VALUES(#{userId},#{content}," +
             "#{answer},#{ctime})")
     @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", keyColumn = "id",
             before = false, resultType = Integer.class)
-    public Integer createShortAnswer(ShortAnswer shortAnswer);
+    public Integer createEssay(Essay essay);
 
-    @Delete("DELETE FROM md_short_answer WHERE id = #{id}")
-    public Integer deleteShortAnswer(@Param("id") Integer id);
+    @Delete("DELETE FROM md_essay WHERE id = #{id}")
+    public Integer deleteEssay(@Param("id") Integer id);
 
-    @Select("SELECT * FROM md_short_answer WHERE id = #{id}")
+    @Select("SELECT * FROM md_essay WHERE id = #{id}")
     @Results({
             @Result(property = "id", column = "id"),
             @Result(property = "userId", column = "user_id"),
             @Result(property = "content", column = "content"),
             @Result(property = "answer", column = "answer"),
             @Result(property = "ctime", column = "ctime")})
-    public ShortAnswer getShortAnswer(@Param("id") Integer id);
+    public Essay getEssay(@Param("id") Integer id);
 
     @Select({"<script>",
-            "SELECT * FROM md_short_answer WHERE user_id = #{userId}",
+            "SELECT * FROM md_essay WHERE user_id = #{userId}",
             "<if test='limit != null'> AND limit  #{limit} </if>",
             "<if test='offset != null'> AND offset  #{offset} </if>",
             "</script>"})
@@ -39,12 +39,12 @@ public interface ShortAnswerDAO {
             @Result(property = "content", column = "content"),
             @Result(property = "answer", column = "answer"),
             @Result(property = "ctime", column = "ctime")})
-    public List<ShortAnswer> getShortAnswerListByUserId(@Param("userId") Integer userId,
+    public List<Essay> getEssayListByUserId(@Param("userId") Integer userId,
                                                       @Param("limit") Integer limit,
                                                       @Param("offset") Integer offset);
 
     @Update({"<script>",
-            "UPDATE md_short_answer ",
+            "UPDATE md_essay ",
             "<set>",
             "<if test='content != null'>content = #{content},</if>",
             "<if test='answer != null'>answer = #{answer},</if>",
@@ -52,11 +52,12 @@ public interface ShortAnswerDAO {
             "</set>",
             "WHERE id = #{id}",
             "</script>"})
-    public Integer updateShortAnswer(ShortAnswer completion);
+    public Integer updateEssay(Essay essay);
 
     @Select({"<script>",
             "SELECT count(DISTINCT id) as total  ",
-            "FROM md_short_answer where user_id = #{userId} ",
+            "FROM md_essay where user_id = #{userId} ",
             "</script>"})
-    public Integer countShortAnswer(@Param("userId") Integer userId);
+    public Integer countEssay(@Param("userId") Integer userId);
+
 }
