@@ -16,7 +16,7 @@ public class Message {
     public static final Message NO_MORE_SINGLE_SELECT = new Message(6, "No more single select");
     public static final Message NO_MORE_CHECK = new Message(7, "No more single select");
     public static final Message NO_MORE_MULTI_SELECT = new Message(8, "No more single select");
-    public static final Message NO_MORE_COMPLETION_SELECT = new Message(9, "No more single select");
+    public static final Message NO_MORE_COMPLETION = new Message(9, "No more single select");
     public static final Message CATCH = new Message(21, "catch error");
     public static final Message NOT_MATCH = new Message(22, "match error");
 
