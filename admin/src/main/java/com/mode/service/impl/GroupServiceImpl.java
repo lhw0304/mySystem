@@ -51,21 +51,17 @@ public class GroupServiceImpl implements GroupService{
                                         shortAnswerCount, Integer essayCount) {
         Response res = new Response();
         try {
-            List<Completion> completionList = completionDAO.getCompletionListByUserId(userId,
-                    null, null);
+            List<Completion> completionList = completionDAO.getGroupList(userId, checkCount);
 
-            List<Check> checkList = checkDAO.getCheckListByUserId(userId, null, null);
+            List<Check> checkList = checkDAO.getGroupList(userId, checkCount);
 
-            List<SingleSelect> singleSelectList = singleSelectDAO.getSingleSelectListByUserId
-                    (userId, null, null);
+            List<SingleSelect> singleSelectList = singleSelectDAO.getGroupList(userId, checkCount);
 
-            List<MultiSelect> multiSelectList = multiSelectDAO.getMultiSelectListByUserId(userId,
-                    null, null);
+            List<MultiSelect> multiSelectList = multiSelectDAO.getGroupList(userId, checkCount);
 
-            List<ShortAnswer> shortAnswerList = shortAnswerDAO.getShortAnswerListByUserId(userId,
-                    null, null);
+            List<ShortAnswer> shortAnswerList = shortAnswerDAO.getGroupList(userId, checkCount);
 
-            List<Essay> essayList = essayDAO.getEssayListByUserId(userId, null, null);
+            List<Essay> essayList = essayDAO.getGroupList(userId, checkCount);
 
             Map<String, Object> payload = new HashMap<>();
             payload.put("completionList",completionList);

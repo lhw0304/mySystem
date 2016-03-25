@@ -1,10 +1,15 @@
 package com.mode.dao;
 
 import com.mode.entity.SingleSelect;
-import org.apache.ibatis.annotations.*;
-import org.springframework.security.access.method.P;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * Created by Administrator on 2016/3/7.
@@ -73,4 +78,12 @@ public interface SingleSelectDAO {
             "FROM md_single_select where user_id = #{userId} ",
             "</script>"})
     public Integer countSingleSelect(@Param("userId") Integer userId);
+
+    @Select({
+            "<script>",
+            "select * from md_single_select where user_id = #{userId} order by rand() limit 0 #{limit}",
+            "</script>"
+    })
+    public List<SingleSelect> getGroupList(@Param("userId") Integer userId,
+                                         @Param("limit") Integer limit);
 }

@@ -60,4 +60,12 @@ public interface EssayDAO {
             "</script>"})
     public Integer countEssay(@Param("userId") Integer userId);
 
+    @Select({
+            "<script>",
+            "select * from md_essay where user_id = #{userId} order by rand() limit 0 #{limit}",
+            "</script>"
+    })
+    public List<Essay> getGroupList(@Param("userId") Integer userId,
+                                         @Param("limit") Integer limit);
+
 }

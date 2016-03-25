@@ -59,4 +59,12 @@ public interface ShortAnswerDAO {
             "FROM md_short_answer where user_id = #{userId} ",
             "</script>"})
     public Integer countShortAnswer(@Param("userId") Integer userId);
+
+    @Select({
+            "<script>",
+            "select * from md_short_answer where user_id = #{userId} order by rand() limit 0 #{limit}",
+            "</script>"
+    })
+    public List<ShortAnswer> getGroupList(@Param("userId") Integer userId,
+                                         @Param("limit") Integer limit);
 }

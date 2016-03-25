@@ -70,4 +70,12 @@ public interface MultiSelectDAO {
             "FROM md_multi_select where user_id = #{userId} ",
             "</script>"})
     public Integer countMultiSelect(@Param("userId") Integer userId);
+
+    @Select({
+            "<script>",
+            "select * from md_multi_select where user_id = #{userId} order by rand() limit 0 #{limit}",
+            "</script>"
+    })
+    public List<MultiSelect> getGroupList(@Param("userId") Integer userId,
+                                         @Param("limit") Integer limit);
 }
