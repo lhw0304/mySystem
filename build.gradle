@@ -4,7 +4,7 @@ subprojects {
     apply plugin: 'idea'
     apply plugin: 'eclipse'
 
-    archivesBaseName = 'MySystem'
+    archivesBaseName = 'system'
     group = 'bank'
     version = '1.0'
 

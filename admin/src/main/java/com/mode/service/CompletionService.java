@@ -3,7 +3,7 @@ package com.mode.service;
 import com.mode.config.Response;
 
 /**
- * Created by нд╬Щ on 2016/3/11.
+ * Created by kang on 2016/3/11.
  */
 public interface CompletionService {
 

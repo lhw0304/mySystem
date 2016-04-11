@@ -30,9 +30,6 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountDAO accountDAO;
 
-
-
-
     @Autowired
     @Qualifier("authenticationManager")
     private AuthenticationManager authManager;
@@ -98,69 +95,6 @@ public class AccountServiceImpl implements AccountService {
         return res;
     }
 
-    public Response updateMerchantAccount(Integer userId) {
-        Response res = new Response();
-        Integer unLock = 0;
-        if (accountDAO.checkMerchant(userId, unLock) == 0) {
-            res.setMessage(Message.FAILURE);
-        } else {
-            res.setMessage(Message.SUCCESS);
-        }
-        return res;
-    }
-
-    public Response createStylistAccount(String email, String password,String name, String role,
-                                         Integer level, String country){
-        Response res = new Response();
-        Account accountPrevious = accountDAO.getAccountByUsername(email);
-        if(accountPrevious != null) {
-            String oldRole = accountPrevious.getRole();
-            Integer pos = oldRole.indexOf(role);
-            if (pos != -1) {
-                res.setMessage(Message.DUPLICATE_USER);
-                return res;
-            } else {
-                String newRole = oldRole + "," + role;
-                accountPrevious.setRole(newRole);
-                Integer successUpdate = accountDAO.updateUserRole(accountPrevious.getUserId(), newRole);
-
-            }
-
-            return res;
-        }
-        Account account = new Account();
-        account.setUsername(email);
-        account.setPassword(password);
-        account.setRole(role);
-        final long now =  System.currentTimeMillis();
-        account.setUtime(now);
-        account.setCtime(now);
-
-        account.setLocked(0);
-
-        Profile profile = new Profile();
-
-
-        Account ret = createAccountInternal(account, profile);
-        if (ret == null) {
-            res.setMessage(Message.DATABASE);
-            return res;
-        }
-        res.setMessage(Message.SUCCESS);
-
-        LoginUser user = new LoginUser();
-        user.setUserId(ret.getUserId());
-        user.setUsername(ret.getUsername());
-        user.setToken(ret.getAccessToken());
-        user.setExpires(ret.getExpireTime());
-        user.setRole(ret.getRole());
-        Map<String, LoginUser> payload = new HashMap<String, LoginUser>();
-        payload.put("loginUser", user);
-        res.setPayload(payload);
-
-        return res;
-    }
-
     private Account createAccountInternal(Account account, Profile profile) {
         try {
             /* Add a new account to database. */
@@ -179,10 +113,6 @@ public class AccountServiceImpl implements AccountService {
             Profile p = profile;
             p.setUserId(createdAcct.getUserId());
 
-
-
-
-
             /* Set the successful response */
             return createdAcct;
         } catch (Exception e) {
@@ -190,23 +120,4 @@ public class AccountServiceImpl implements AccountService {
         }
     }
 
-    public Response getAccountInformation(Integer userId, String username, Integer limit, Integer offset) {
-        Response res = new Response();
-        try{
-            if(username != null) {
-                userId = accountDAO.getAccountByUsername(username).getUserId();
-            }
-            Account account = accountDAO.getAccountByUserId(userId);
-            account.setPassword(null);
-            account.setAccessToken(null);
-
-
-            res.setMessage(Message.SUCCESS);
-        } catch (Exception e) {
-            e.printStackTrace();
-            res.setMessage(Message.FAILURE);
-            return res;
-        }
-        return res;
-    }
 }

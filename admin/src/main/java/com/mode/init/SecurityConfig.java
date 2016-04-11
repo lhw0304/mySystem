@@ -66,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(new AuthenticationTokenProcessingFilter(userDetailsService()),
                         UsernamePasswordAuthenticationFilter.class);
 
-        http.authorizeRequests().antMatchers("/v2/login").permitAll()
+        http.authorizeRequests().antMatchers("/account/login").permitAll()
                 .anyRequest().hasAnyAuthority("ADMIN");
 
         http.exceptionHandling()

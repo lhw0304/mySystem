@@ -9,10 +9,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
- * Created by нд╬Щ on 2016/3/11.
+ * Created by О©╫д╬О©╫ on 2016/3/11.
  */
+@Service
 public class ShortAnswerServiceImpl implements ShortAnswerService{
 
     @Autowired

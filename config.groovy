@@ -1,7 +1,7 @@
 environments {
     local {
         jdbc {
-            url = 'jdbc:mysql://127.0.0.1:3306/mode?useUnicode=true&characterEncoding=utf-8'
+            url = 'jdbc:mysql://127.0.0.1:3306/my_system?useUnicode=true&characterEncoding=utf-8'
             username = 'root'
             password = 'root'
             maxActive = '5'
