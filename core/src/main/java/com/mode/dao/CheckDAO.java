@@ -59,4 +59,12 @@ public interface CheckDAO {
             "FROM md_check where user_id = #{userId} ",
             "</script>"})
     public Integer countCheck(@Param("userId") Integer userId);
+
+    @Select({
+            "<script>",
+            "select * from md_check where user_id = #{userId} order by rand() limit 0 #{limit}",
+            "</script>"
+    })
+    public List<Check> getGroupList(@Param("userId") Integer userId,
+                                    @Param("limit") Integer limit);
 }

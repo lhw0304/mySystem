@@ -26,11 +26,12 @@ import com.mode.dao.AccountDAO;
 import com.mode.entity.Account;
 import com.mode.util.TokenHandler;
 
-import io.jsonwebtoken.ExpiredJwtException;
-
 public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
 
     private final UserDetailsService userService;
+
+
+    private String uri;
 
     public AuthenticationTokenProcessingFilter(UserDetailsService userService) {
         this.userService = userService;
@@ -45,9 +46,12 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
 
         if (authToken != null) {
             /* Decode login user information from token */
-            try {
-                String username = TokenHandler.parseToken(authToken);
-                UserDetails userDetails = userService.loadUserByUsername(username);
+            LoginUser loginUser = TokenHandler.getUserFromToken(authToken);
+            String username = loginUser.getUsername();
+            UserDetails userDetails = userService.loadUserByUsername(username);
+
+            /* Check if the token is valid or expired*/
+            if (TokenHandler.validateToken(authToken)) {
 
                 /* Check if the account is locked*/
                 if (userDetails.isAccountNonLocked()) {
@@ -65,20 +69,16 @@ public class AuthenticationTokenProcessingFilter extends GenericFilterBean {
                         return;
                     }
                 }
-            } catch (ExpiredJwtException e){
-                if (!httpRequest.getRequestURI().contains(BaseConfig.ERROR_URL_TEMPLATE)) {
-                    httpResponse.sendRedirect(httpRequest.getContextPath() + BaseConfig.ERROR_1001);
-                    return;
-                }
-            } catch (Exception e){
+            } else {
                 if (!httpRequest.getRequestURI().contains(BaseConfig.ERROR_URL_TEMPLATE)) {
                     /* If token is not presented, return unauthorized error */
-                    httpResponse.sendRedirect(httpRequest.getContextPath() + BaseConfig.ERROR_401);
+                    httpResponse.sendRedirect(httpRequest.getContextPath() + BaseConfig.ERROR_1001);
                     return;
                 }
             }
         }
         chain.doFilter(request, response);
+
     }
 
     private HttpServletRequest getAsHttpRequest(ServletRequest request) {

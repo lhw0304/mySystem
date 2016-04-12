@@ -118,5 +118,44 @@ public interface AccountDAO {
     public Integer updateUserRole(@Param("userId") Integer userId,
                                   @Param("role") String role);
 
+    @Select({
+            "<script>",
+            "SELECT * FROM md_account ",
+            "<where>",
+            "<choose>",
+            "<when test='id != null'> id = #{id} </when>",
+            "<otherwise>",
+            "<if test='username != null'> AND username = #{username} </if>",
+            "<if test='password != null'> AND password = #{password} </if>",
+            "<if test='email != null'> AND email = #{email} </if>",
+            "<if test='mobile != null'> AND mobile = #{mobile} </if>",
+            "<if test='role != null'> AND role like \"%\"#{role}\"%\" </if>",
+            "<if test='status != null'> AND status = #{status} </if>",
+            "<if test='activateKey != null'> AND activate_key = #{activateKey} </if>",
+            "<if test='resetPasswordKey != null'> AND reset_password_key = #{resetPasswordKey} </if>",
+            "<if test='source != null'> AND source = #{source} </if>",
+            "<if test='ctime != null'> AND ctime = #{ctime} </if>",
+            "<if test='utime != null'> AND utime = #{utime} </if>",
+            "</otherwise>",
+            "</choose>",
+            "</where>",
+            "</script>"
+    })
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "username", column = "username"),
+            @Result(property = "password", column = "password"),
+            @Result(property = "email", column = "email"),
+            @Result(property = "mobile", column = "mobile"),
+            @Result(property = "accessToken", column = "access_token"),
+            @Result(property = "expireTime", column = "expire_time"),
+            @Result(property = "role", column = "role"),
+            @Result(property = "status", column = "status"),
+            @Result(property = "activateKey", column = "activate_key"),
+            @Result(property = "resetPasswordKey", column = "reset_password_key"),
+            @Result(property = "source", column = "source"),
+            @Result(property = "ctime", column = "ctime"),
+            @Result(property = "utime", column = "utime")})
+    public Account getAccount(Account account);
 
 }

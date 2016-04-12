@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.mode.dao.AccountDAO;
 import com.mode.entity.Account;
@@ -35,7 +37,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      * . Easy.
      */
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
         Account account = accountDAO.getAccountByUsername(username);
         if (account == null) {
             throw new UsernameNotFoundException("User " + username + " not found.");
@@ -55,7 +56,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             accountNonLocked = false;
         }
 
-        return new AuthenticationUser(username, account.getPassword(), true, true, true, accountNonLocked,
-                authorities, account.getUserId());
+        return new User(username, account.getPassword(), true, true, true, accountNonLocked,
+                authorities);
     }
 }

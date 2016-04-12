@@ -17,8 +17,7 @@ import org.springframework.stereotype.Service;
 public class UnauthorizedEntryPoint implements AuthenticationEntryPoint {
 
     public void commence(HttpServletRequest request, HttpServletResponse response,
-            AuthenticationException authException) throws IOException, ServletException {
-        //response.sendRedirect(request.getContextPath() + "/v2/error?code=401");
-        response.setStatus(401);
+                         AuthenticationException authException) throws IOException, ServletException {
+        response.sendRedirect(request.getContextPath() + "/v2/error?code=401");
     }
 }

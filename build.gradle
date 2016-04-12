@@ -4,9 +4,9 @@ subprojects {
     apply plugin: 'idea'
     apply plugin: 'eclipse'
 
-    archivesBaseName = 'system'
-    group = 'bank'
-    version = '1.0'
+    archivesBaseName = 'platform'
+    group = 'com.mode'
+    version = '2.0'
 
     // Global settings
     ext {
@@ -34,14 +34,12 @@ subprojects {
         jpushVersion = '3.2.7'
         guavaVersion = '18.0'
         gsonVersion = '2.3.1'
-        jjwtVersion = '0.6.0'
-        jerseyVersion = '1.19'
 
         sharedManifest = manifest {
             attributes 'Implementation-Title': "${project.name}",
                     'Implementation-Version': "${version}",
-                    'Implementation-Vendor': 'NEAU',
-                    'Built-By': 'WK',
+                    'Implementation-Vendor': 'Shanghai Yedao Technology',
+                    'Built-By': 'Mode',
                     'Built-Date': new Date().getDateTimeString(),
                     'Built-With': "gradle-${project.getGradle().getGradleVersion()}, groovy-${GroovySystem.getVersion()}",
                     'Created-By': 'Java ' + System.getProperty('java.version') + ' (' + System.getProperty('java.vendor') + ')'
@@ -64,13 +62,11 @@ subprojects {
     }
 
     // Config servlet container for war projects
-    configure([project(":admin")]) {
+    configure([project(":user")]) {
 
 
         // Add the gretty plugin for running/deploying war against jetty or tomcat
-        apply from:
-                'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
-
+        apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
 
         // Servlet container specific settings
         gretty {
@@ -84,8 +80,7 @@ subprojects {
         processResources {
             def env = project.hasProperty('env') ? env : 'local'
             def configFile = file("${rootProject.projectDir}/config.groovy")
-            def envProp = new ConfigSlurper("${env}").parse(configFile.toURL
-                    ()).toProperties()
+            def envProp = new ConfigSlurper("${env}").parse(configFile.toURL()).toProperties()
 
             from(sourceSets.main.resources.srcDirs) {
                 filter(org.apache.tools.ant.filters.ReplaceTokens, tokens: envProp)
@@ -118,8 +113,6 @@ project(':core') {
         compile "com.fasterxml.jackson.core:jackson-annotations:${jacksonVersion}"
         compile "javax.servlet:javax.servlet-api:${servletVersion}"
         compile "org.mybatis:mybatis:${mybatisVersion}"
-        compile "com.aliyun.oss:aliyun-sdk-oss:${ossVersion}"
-        compile "io.jsonwebtoken:jjwt:${jjwtVersion}"
 
         testCompile "org.mybatis:mybatis-spring:${mybatisSpringVersion}"
         testCompile "org.springframework:spring-jdbc:${springVersion}"
@@ -128,29 +121,26 @@ project(':core') {
     }
 }
 
-project(':admin'){
+project(':user') {
 
     apply plugin: 'war'
 
     war {
-        classifier = 'admin'
+        classifier = 'user'
         manifest = sharedManifest
     }
 
     dependencies {
         compile project(':core')
         compile "org.springframework:spring-webmvc:${springVersion}"
-        compile "org.mybatis:mybatis-spring:${mybatisSpringVersion}"
-        compile "org.springframework:spring-jdbc:${springVersion}"
-        compile "org.springframework:spring-tx:${springVersion}"
         compile "log4j:log4j:${log4jVersion}"
         compile "org.slf4j:slf4j-api:${slf4jVersion}"
         compile "org.slf4j:slf4j-log4j12:${slf4jVersion}"
         compile "com.alibaba:druid:${druidVersion}"
+        compile "org.mybatis:mybatis-spring:${mybatisSpringVersion}"
+        compile "org.springframework:spring-jdbc:${springVersion}"
+        compile "org.springframework:spring-tx:${springVersion}"
         compile "mysql:mysql-connector-java:${mysqlVersion}"
-        compile "com.sun.jersey:jersey-core:${jerseyVersion}"
-        compile "com.sun.jersey:jersey-client:${jerseyVersion}"
-        compile "com.sun.jersey.contribs:jersey-multipart:${jerseyVersion}"
 
         testCompile "junit:junit:${junitVersion}"
         testCompile "org.hamcrest:hamcrest-all:${hamcrestVersion}"
@@ -160,3 +150,4 @@ project(':admin'){
         testCompile "com.jayway.jsonpath:json-path-assert:${jsonpathVersion}"
     }
 }
+

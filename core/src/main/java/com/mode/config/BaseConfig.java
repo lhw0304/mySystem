@@ -1,7 +1,5 @@
 package com.mode.config;
 
-import io.jsonwebtoken.SignatureAlgorithm;
-
 /**
  * Base configurations for the backend systems.
  *
@@ -36,7 +34,8 @@ public class BaseConfig {
     public static final String FOLDER_MODELOOK = "modelooks";
     public static final String FOLDER_AVATAR = "avatars";
     public static final String FOLDER_STYLIST_AVATAR = "stylists";
-    public static final String FOLDER_COVER_IMAGE = "coverImage";
+    public static final String FOLDER_COVER_IMAGE = "coverimage";
+    public static final String FOLDER_ARTICLE_COVER_IMAGE = "articlecoverimage";
 
     public static final String FOLDER_REDEEM = "redeems";
     public static final String FOLDER_LUCKYDRAW = "luckydraws";
@@ -68,8 +67,4 @@ public class BaseConfig {
     public static final String ERROR_URL_TEMPLATE = "v2/error";
     public static final String ERROR_1001 = "/v2/error?code=1001";
     public static final String ERROR_1002 = "/v2/error?code=1002";
-    public static final String ERROR_401 = "/v2/error?code=401";
-
-    // Key encryption algorithm
-    public static final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS256;
 }

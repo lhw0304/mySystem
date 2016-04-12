@@ -1,26 +1,29 @@
 package com.mode.util;
 
 import java.io.ByteArrayInputStream;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
 
+import javax.sound.midi.SysexMessage;
 import javax.xml.bind.DatatypeConverter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mode.config.BaseConfig;
 import com.mode.security.LoginUser;
-
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
 
 public class TokenHandler {
 
-    /* Token Handler for old token */
     public static LoginUser getUserFromToken(String token) {
         return (token != null) ? fromJSON(fromBase64(token)) : null;
+    }
+
+    public static String createToken(String username, String role, long expires) {
+        LoginUser user = new LoginUser();
+        user.setUsername(username);
+        user.setRole(role);
+        user.setExpires(expires);
+        final StringBuilder sb = new StringBuilder(170);
+        sb.append(toBase64(toJSON(user)));
+        return sb.toString();
     }
 
     private static LoginUser fromJSON(final byte[] userBytes) {
@@ -58,33 +61,5 @@ public class TokenHandler {
         }
 
         return false;
-    }
-
-    /* Token Handler for new token */
-    public static String createToken(String username) {
-        long now = System.currentTimeMillis();
-        long expires = now + BaseConfig.EXPIRE_IN_TWO_WEEKS;
-
-        Date nowDate = new Date(now);
-        Date expireDate = new Date(expires);
-
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("username", username);
-
-        JwtBuilder builder = Jwts.builder()
-                .setClaims(claims)
-                .setExpiration(expireDate)
-                .setIssuedAt(nowDate)
-                .signWith(BaseConfig.SIGNATURE_ALGORITHM, KeyGenerator.getKey());
-
-        return builder.compact();
-    }
-
-    public static String parseToken(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(KeyGenerator.getKey())
-                .parseClaimsJws(token).getBody();
-
-        return String.valueOf(claims.get("username"));
     }
 }
