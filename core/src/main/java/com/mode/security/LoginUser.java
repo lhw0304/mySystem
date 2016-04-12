@@ -2,7 +2,7 @@ package com.mode.security;
 
 /**
  * This is for generating access tokens and to verify tokens.
- *
+ * 
  * @author chao
  *
  */

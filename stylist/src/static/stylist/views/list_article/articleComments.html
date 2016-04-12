@@ -1,0 +1,42 @@
+
+<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>Comments</h5>
+        </div>
+        <div class="ibox-content" ng-controller="listCommentController">
+            <div>
+                <div class="feed-activity-list">
+                    <div class="feed-element">
+                        <div class="media-body ">
+                            <div class="form-group">
+                                <textarea id="message" class="form-control" placeholder="Write comment..."></textarea>
+                            </div>
+                            <div class="pull-right">
+                                <a class="btn btn-xs btn-primary" ng-click="sendMessage()"><i class="fa fa-send-o"></i> Send</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="feed-activity-list" ng-repeat="x in list">
+                    <div class="feed-element">
+                        <a href="" class="pull-left" ng-if="x.avatar.length>0">
+                            <img alt="image" class="img-circle" ng-src="{{x.avatar}}">
+                        </a>
+                        <a href="" class="pull-left" ng-if="x.avatar.length==0">
+                            <img alt="image" class="img-circle" src="img/default.jpg">
+                        </a>
+                        <div class="media-body ">
+                            <strong>{{x.nickname}}:</strong> {{x.content}} <br>
+                            <small class="text-muted">{{x.ctime | date:'yyyy-MM-dd HH:mm:ss'}}</small>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-block m" ng-show="has_more()" ng-click="show_more()"><i class="fa fa-arrow-down"></i> Show More</button>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,78 @@
+<toaster-container></toaster-container>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <h2>Tagged Images</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="home.profile">Home</a>
+            </li>
+            <li class="active">
+                <strong>Tagged Images</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content" ng-controller="listTaggifiedImagesCtrl">
+    <div class="row animated fadeInRight" id="taggifiedImages">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <p>Notice: It may take few hours to abstract products info from the link submitted
+                by yourself</p>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div ng-repeat="image in taggifiedImages1">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content no-padding border-left-right">
+                            <div ng-html-compile="toProperSize(image.taggifiedImage)"></div>
+                        </div>
+                        <div class="ibox-content profile-content">
+                            <div class="user-button">
+                                <button type="button" class="btn btn-primary btn-sm btn-block"
+                                        ng-click="getPointImageScripts($event)" id="{{image.id}}">Embed the photo into your blog</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div ng-repeat="image in taggifiedImages2">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content no-padding border-left-right">
+                            <div ng-html-compile="toProperSize(image.taggifiedImage)"></div>
+                        </div>
+                        <div class="ibox-content profile-content">
+                            <div class="user-button">
+                                <button type="button" class="btn btn-primary btn-sm btn-block"
+                                        ng-click="getPointImageScripts($event)" id="{{image.id}}">Embed the photo into your blog</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div ng-repeat="image in taggifiedImages3">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content no-padding border-left-right">
+                            <div ng-html-compile="toProperSize(image.taggifiedImage)"></div>
+                        </div>
+                        <div class="ibox-content profile-content">
+                            <div class="user-button">
+                                <button type="button" class="btn btn-primary btn-sm btn-block"
+                                        ng-click="getPointImageScripts($event)" id="{{image.id}}">Embed the photo into your blog</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-show="loadmore" class="wrapper wrapper-content">
+        <button class="btn btn-primary btn-lg" ng-click="listTaggifiedImages()">Load More</button>
+    </div>
+</div>

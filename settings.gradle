@@ -1,3 +1,3 @@
 rootProject.name = 'platform'
 
-include "core", "user"
+include "core", "admin"

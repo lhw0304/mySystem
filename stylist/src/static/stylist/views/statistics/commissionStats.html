@@ -1,0 +1,55 @@
+<toaster-container></toaster-container>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <h2>Commission Statistics</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="home.profile">Home</a>
+            </li>
+            <li class="active">
+                Statistics
+            </li>
+            <li class="active">
+                <strong>Commission </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div ng-controller="commissionStatsController as chart">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Commission Statistics</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <div class="flot-chart">
+                                    <div flot class="flot-chart-content" dataset="dataSet"
+                                         options="flotOptions">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+
+                                <h4 class="no-margins">Commission Rule</h4>
+                                <small style="color:#d0d0d0">Only for reference, might be changed
+                                </small>
+                                <br></br>
+
+                                <table class="table table-hover" id="configs">
+
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

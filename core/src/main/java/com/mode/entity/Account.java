@@ -8,6 +8,7 @@ public class Account {
     private Long ctime;
     private Long utime;
     private Integer locked;
+    private Integer status;
     private String accessToken;
     private Long expireTime;
     private String role;
@@ -84,6 +85,14 @@ public class Account {
         this.role = role;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
@@ -93,6 +102,7 @@ public class Account {
                 ", ctime=" + ctime +
                 ", utime=" + utime +
                 ", locked=" + locked +
+                ", status=" + status +
                 ", accessToken='" + accessToken + '\'' +
                 ", expireTime=" + expireTime +
                 ", role='" + role + '\'' +

@@ -1,0 +1,98 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul side-navigation class="nav metismenu" id="side-menu">
+            <li class="nav-header" style="padding: 33px 25px 0px 25px;">
+                <a ui-sref="home.profile">
+                    <div class="dropdown profile-element" style="margin:4px 5px 4px 5px;">
+                        <img id="avatar" alt="image" class="img-circle" ng-src="{{navAvatar}}"
+                             width="122"
+                             height="122" style="display:block;position:relative;margin:auto;"/>
+
+                        <div style="height:15px"></div>
+                        <div class="" style="text-align:center">
+                                <span class="clear">
+                                    <span class="block">
+                                        <strong>{{navNickname}}</strong>
+                                    </span>
+                                </span>
+                        </div>
+                    </div>
+                </a>
+            </li>
+
+            <li ng-class="{active: $state.includes('app')}"><a ui-sref="app.write.step_one">
+                <i class="fa fa-pencil" style="width:30px;"></i><span
+                    class="nav-label" style="text-align:left">Write</span></a>
+            </li>
+
+            <li ng-class="{active: $state.includes('images')}"><a ui-sref="images.taggifiedImages">
+                <i class="fa fa-image" style="width:30px;"></i><span
+                    class="nav-label" style="text-align:left">Tagged Images</span></a>
+            </li>
+
+            <li ng-class="{active: $state.includes('pages')}">
+                <a href=""><i class="fa fa-file-text-o" style="width:30px;"></i><span
+                        class="nav-label" style="text-align:left">List Articles</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('pages')}">
+                    <li ui-sref-active="active"><a ui-sref="pages.drafts">Drafts</a></li>
+                    <li ui-sref-active="active"><a ui-sref="pages.submitted">Submitted</a></li>
+                    <li ui-sref-active="active"><a ui-sref="pages.approved">Approved</a></li>
+                    <li ui-sref-active="active"><a ui-sref="pages.rejected">Rejected</a></li>
+                </ul>
+            </li>
+
+            <!-- hide the commission and article statics in the navigation -->
+
+            <!-- <li ng-class="{active: $state.includes('withdraw')}">
+                <a href="index.html"><i class="fa fa-dollar" style="width:30px;"></i><span
+                        class="nav-label" style="text-align:left">Commission</span>
+                    <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level "
+                    ng-class="{in: $state.includes('withdraw')}">
+                    <li ui-sref-active="active"><a ui-sref="withdraw.withdraw_list">Withdraw</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li ng-class="{active: $state.includes('statistics')}">
+                <a href=""><i class="fa fa-bar-chart-o" style="width:30px;"></i><span
+                        class="nav-label" style="text-align:left">Statistics</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" ng-class="{in: $state.includes('statistics')}">
+                    <li ui-sref-active="active"><a ui-sref="statistics.article">Article</a></li>
+                    <li ui-sref-active="active"><a ui-sref="statistics.commission">Commission</a>
+                    </li>
+                </ul>
+            </li> -->
+
+            <li ng-class="{active: $state.includes('information')}">
+                <a href="index.html"><i
+                        class="fa fa-question-circle" style="width:30px;"></i><span
+                        class="nav-label" style="text-align:left">Information</span> <span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level "
+                    ng-class="{in: $state.includes('information')}">
+                    <li ui-sref-active="active"><a ui-sref="information.guideCreateArticle">Guide
+                        For Writing Article</a></li>
+                    <li ui-sref-active="active"><a ui-sref="information.faq">FAQ</a></li>
+                    <li ui-sref-active="active"><a ui-sref="information.BloggerGrowthSystem">Blogger Growth System</a></li>
+                </ul>
+            </li>
+            <li ng-class="{active: $state.includes('items')}">
+                <a href="index.html"><i
+                        class="fa fa-tags" style="width:30px;"></i><span
+                        class="nav-label" style="text-align:left">Items</span> <span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level "
+                    ng-class="{in: $state.includes('items')}">
+                    <li ui-sref-active="active"><a ui-sref="items.select">Browse Items</a></li>
+                    <li ui-sref-active="active"><a ui-sref="items.cart">My Cart</a></li>
+                    <li ui-sref-active="active"><a ui-sref="items.order">My Orders</a></li>
+                    <li ui-sref-active="active"><a ui-sref="items.list">Received Items</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+</nav>

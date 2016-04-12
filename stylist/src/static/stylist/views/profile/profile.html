@@ -1,0 +1,105 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <h2>Profile </h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="home.profile">Home</a>
+            </li>
+            <li class="active">
+                <strong>Profile </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="getProfileCtrl">
+
+
+    <div class="row m-b-lg m-t-lg">
+        <div class="col-md-2"></div>
+        <div class="col-md-6">
+            <div class="profile-image">
+                <img ng-src={{avatar}} class="img-circle circle-border m-b-md" alt="profile">
+            </div>
+            <div class="profile-info">
+                <div class="">
+                    <div>
+                        <p class="no-margins" style="font-size:16px;">
+                            {{nickname}} &nbsp;&nbsp;
+                            <img  ng-if="level==1" src="img/VIP1.png" height="25" width="25" tooltip="VIP Level"/>
+                            <img  ng-if="level==2" src="img/VIP2.png" height="25" width="25" tooltip="VIP Level"/>
+                            <img  ng-if="level==3" src="img/VIP3.png" height="25" width="25" tooltip="VIP Level"/>
+                            <img  ng-if="level==4" src="img/VIP4.png" height="25" width="25" tooltip="VIP Level"/>
+                        </p>
+                        <h4></h4>
+                        <p style="font-size:16px;" id="description">
+                            {{description}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <a
+                    ui-sref="home.updateprofile"><img src="img/updateprofile.png" width="20"
+                                                    height="20"></a>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+
+            <div class="row" style="font-size:18px;color:#727171">
+                <div class="col-md-6">
+                    <p><strong>{{articleCount}}</strong></p>
+                    <p>Articles</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>{{followedUserCount}}</strong></p>
+                    <p>Followers</p>
+                </div>
+                <!-- hide the stylist commission -->
+                <!--<div class="col-md-4">-->
+                    <!--<p><strong>{{usd}}&nbsp;USD</strong></p>-->
+                    <!--<p>Commission</p>-->
+                <!--</div>-->
+            </div>
+
+            <div class="m-t-lg"></div>
+            <!-- <label style="color:#c8cbca;font-size:16px;">Information</label>-->
+            <HR width="100%" color="grey" SIZE=10 style="border-color:grey;"/>
+            <table style="text-align:left;align:center;">
+
+                <tr style="height:30px;color:grey;font-size:16px;">
+                    <td style="width:200px;"><i class="fa fa-paypal"></i> &nbsp;&nbsp;Paypal Account
+                    </td>
+                    <td style="margin-left:20px;">{{paypal}}</td>
+                </tr>
+                <tr style="height:30px;color:grey;font-size:16px;">
+                    <td><i class="fa fa-building"></i>&nbsp;&nbsp;&nbsp;Shipping Address</td>
+                    <td style="margin-left:20px;" ng-bind="address"></td>
+                </tr>
+                <tr style="height:30px;;color:grey;font-size:16px;">
+                    <td><i class="fa fa-eye"></i>&nbsp;&nbsp;&nbsp;Password</td>
+                    <td style="margin-left:20px;"><a ui-sref="home.changepassword"
+                                                     style="color:#00c6d8">Modify</a></td>
+                </tr>
+            </table>
+            <div style="height:50px;">
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <div id="foo"></div>
+</div>

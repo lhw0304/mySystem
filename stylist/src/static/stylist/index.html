@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html ng-app="inspinia">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?2de39c97f3f7cf3a8f892ffcd15651bd";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+    <!-- Page title set in pageTitle directive -->
+    <title page-title></title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font awesome -->
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Main Inspinia CSS files -->
+    <link href="css/animate.css" rel="stylesheet">
+    <link id="loadBefore" href="css/style.css" rel="stylesheet">
+
+    <!-- custom.css -->
+    <link href="css/custom.css" rel="stylesheet">
+
+    <!-- Simditor CSS -->
+    <link href="js/plugins/simditor/css/simditor.css" rel="stylesheet">
+
+    <script src="js/webconfig.js"></script>
+
+</head>
+
+<!-- ControllerAs syntax -->
+<!-- Main controller with serveral data used in Inspinia theme on diferent view -->
+
+<body ng-controller="MainCtrl as main" class="{{$state.current.data.specialClass}}"
+      landing-scrollspy id="page-top">
+
+<!-- Main view  -->
+<div ui-view></div>
+
+<!-- jQuery and Bootstrap -->
+<script src="js/plugins/jquery/jquery-2.1.1.min.js"></script>
+<script src="js/plugins/jquery-ui/jquery-ui.js"></script>
+<script src="js/plugins/bootstrap/bootstrap.min.js"></script>
+<script src="js/plugins/jquery/jquery.cookie.js"></script>
+
+<!-- MetsiMenu -->
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+
+<!-- SlimScroll -->
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+<!-- Peace JS -->
+<script src="js/plugins/pace/pace.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="js/inspinia.js"></script>
+
+<!-- Main Angular scripts-->
+<script src="js/plugins/angular/angular.min.js"></script>
+<script src="js/plugins/angular/angular-sanitize.js"></script>
+<script src="js/plugins/oclazyload/dist/ocLazyLoad.min.js"></script>
+<script src="js/plugins/angular-translate/angular-translate.min.js"></script>
+<script src="js/plugins/ui-router/angular-ui-router.min.js"></script>
+<script src="js/plugins/bootstrap/ui-bootstrap-tpls-0.12.0.min.js"></script>
+<script src="js/plugins/angular-idle/angular-idle.js"></script>
+<script src="js/plugins/angular/angular-cookies.js"></script>
+<script src="js/plugins/ngclipboard/clipboard.min.js"></script>
+<script src="js/plugins/ngclipboard/ngclipboard.min.js"></script>
+
+<!-- Simditor Scripts-->
+<script src="js/plugins/simditor/js/module.js"></script>
+<script src="js/plugins/simditor/js/hotkeys.js"></script>
+<script src="js/plugins/simditor/js/uploader.js"></script>
+<script src="js/plugins/simditor/js/simditor.js"></script>
+
+<!-- Anglar App Script -->
+<script src="js/app.js"></script>
+<script src="js/config.js"></script>
+<script src="js/service.js"></script>
+<script src="js/translations.js"></script>
+<script src="js/directives/directives.js"></script>
+
+<!-- Services -->
+<script src="js/services/utilService.js"></script>
+
+<!-- controllers -->
+<script src="js/controllers/loginCtrl.js"></script>
+<script src="js/controllers/listArticleCtrl.js"></script>
+<script src="js/controllers/writeArticleController.js"></script>
+<script src="js/controllers/withdrawController.js"></script>
+<script src="js/controllers/profileController.js"></script>
+<script src="js/controllers/statsController.js"></script>
+<script src="js/controllers/ItemController.js"></script>
+<script src="js/custom.js"></script>
+</body>
+</html>
