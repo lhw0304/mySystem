@@ -6,12 +6,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 /**
  * Created by Administrator on 2016/3/7.
  */
 @RestController
-@RequestMapping("/singleselect/")
+@RequestMapping("/system/single/")
 public class SingleSelectAPI {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -20,20 +21,15 @@ public class SingleSelectAPI {
     private SingleSelectService singleSelectService;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public Response createSingleSelect(@RequestHeader(value = "user_id") Integer userId,
-                                       @RequestHeader(value = "content") String content,
-                                       @RequestHeader(value = "a") String a,
-                                       @RequestHeader(value = "b") String b,
-                                       @RequestHeader(value = "c") String c,
-                                       @RequestHeader(value = "d") String d,
-                                       @RequestHeader(value = "answer") String answer) {
-        Response res = singleSelectService.createSingleSelect(userId, content, a, b, c, d, answer);
+    public Response createSingleSelect(@RequestHeader(value = "userId") Integer userId,
+                                       MultipartHttpServletRequest mRequest) {
+        Response res = singleSelectService.createSingleSelect(userId, mRequest);
         logger.info("v2/singleselect/create,{}",res.getMessage());
         return res;
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    public Response deleteSingleSelect(@RequestHeader(value = "id") Integer id) {
+    public Response deleteSingleSelect(@PathVariable Integer id) {
         Response res = singleSelectService.deleteSingleSelect(id);
         logger.info("v2/singleselect/delete/{id},{}",res.getMessage());
         return res;
@@ -58,13 +54,8 @@ public class SingleSelectAPI {
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     public Response updateSingleSelect(@PathVariable Integer id,
                                        @RequestHeader(value = "userId") Integer userId,
-                                       @RequestHeader(value = "content", required = false) String content,
-                                       @RequestHeader(value = "a", required = false) String a,
-                                       @RequestHeader(value = "b", required = false) String b,
-                                       @RequestHeader(value = "c", required = false) String c,
-                                       @RequestHeader(value = "d", required = false) String d,
-                                       @RequestHeader(value = "answer", required = false) String answer) {
-        Response res = singleSelectService.updateSingleSelect(id, userId, content, a, b, c, d, answer);
+                                       MultipartHttpServletRequest mRequest) {
+        Response res = singleSelectService.updateSingleSelect(id, userId, mRequest);
         logger.info("v2/singleselect/update/{id},{}",res.getMessage());
         return res;
     }

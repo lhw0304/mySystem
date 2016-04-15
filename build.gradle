@@ -66,15 +66,15 @@ subprojects {
 
 
         // Add the gretty plugin for running/deploying war against jetty or tomcat
-        apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
-
-        // Servlet container specific settings
-        gretty {
-            httpPort = 8080
-            contextPath = '/'
-            servletContainer = 'tomcat8'
-            scanInterval = 600 // Hot-deployment scan interval, in seconds.
-        }
+//        apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+//
+//        // Servlet container specific settings
+//        gretty {
+//            httpPort = 8080
+//            contextPath = '/'
+//            servletContainer = 'tomcat8'
+//            scanInterval = 600 // Hot-deployment scan interval, in seconds.
+//        }
 
         // Replace jdbc, log4j tokens with env specific settings
         processResources {

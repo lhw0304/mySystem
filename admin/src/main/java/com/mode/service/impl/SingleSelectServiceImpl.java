@@ -7,6 +7,7 @@ import com.mode.entity.SingleSelect;
 import com.mode.service.SingleSelectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,11 +23,17 @@ public class SingleSelectServiceImpl implements SingleSelectService{
     private SingleSelectDAO singleSelectDAO;
 
     @Override
-    public Response createSingleSelect(Integer userId, String content, String a, String b, String c, String d, String answer) {
+    public Response createSingleSelect(Integer userId,MultipartHttpServletRequest mRequest) {
         Response res = new Response();
         try{
             SingleSelect singleSelect = new SingleSelect();
             singleSelect.setUserId(userId);
+            String content = mRequest.getParameter("content");
+            String a = mRequest.getParameter("A");
+            String b = mRequest.getParameter("B");
+            String c = mRequest.getParameter("C");
+            String d = mRequest.getParameter("D");
+            String answer = mRequest.getParameter("answer");
             singleSelect.setContent(content);
             singleSelect.setA(a);
             singleSelect.setB(b);
@@ -90,7 +97,7 @@ public class SingleSelectServiceImpl implements SingleSelectService{
     @Override
     public Response getSingleSelectList(Integer userId, Integer limit, Integer offset) {
         Response res = new Response();
-        try{
+//        try{
             List<SingleSelect> list = singleSelectDAO.getSingleSelectListByUserId(userId, limit, offset);
             if (list.isEmpty()) {
                 res.setMessage(Message.DATABASE);
@@ -102,20 +109,26 @@ public class SingleSelectServiceImpl implements SingleSelectService{
             payload.put("total",total);
             res.setMessage(Message.SUCCESS);
             res.setPayload(payload);
-        } catch (Exception e) {
-            e.printStackTrace();
-            res.setMessage(Message.CATCH);
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            res.setMessage(Message.CATCH);
+//        }
         return res;
     }
 
     @Override
-    public Response updateSingleSelect(Integer id, Integer userId, String content, String a, String b, String c, String d, String answer) {
+    public Response updateSingleSelect(Integer id, Integer userId, MultipartHttpServletRequest mRequest) {
         Response res = new Response();
         try{
             SingleSelect singleSelect = new SingleSelect();
             singleSelect.setId(id);
             singleSelect.setUserId(userId);
+            String content = mRequest.getParameter("content");
+            String a = mRequest.getParameter("A");
+            String b = mRequest.getParameter("B");
+            String c = mRequest.getParameter("C");
+            String d = mRequest.getParameter("D");
+            String answer = mRequest.getParameter("answer");
             singleSelect.setContent(content);
             singleSelect.setA(a);
             singleSelect.setB(b);

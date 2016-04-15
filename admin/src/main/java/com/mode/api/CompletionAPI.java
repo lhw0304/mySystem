@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 /**
  * Created by kang on 2016/3/11.
  */
 @RestController
-@RequestMapping("/completion")
+@RequestMapping("/system/completion")
 public class CompletionAPI {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -24,10 +25,9 @@ public class CompletionAPI {
     private CompletionService completionService;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public Response createCompletion(@RequestHeader(value = "user_id") Integer userId,
-                                @RequestHeader(value = "content") String content,
-                                @RequestHeader(value = "answer") String answer) {
-        Response res = completionService.createCompletion(userId, content, answer);
+    public Response createCompletion(@RequestHeader(value = "userId") Integer userId,
+                                     MultipartHttpServletRequest mRequest) {
+        Response res = completionService.createCompletion(userId, mRequest);
         logger.info("v2/create,{}",res.getMessage());
         return res;
     }
@@ -57,10 +57,9 @@ public class CompletionAPI {
 
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     public Response updateCompletion(@PathVariable Integer id,
-                                    @RequestHeader(value = "user_id") Integer userId,
-                                     @RequestHeader(value = "content") String content,
-                                     @RequestHeader(value = "answer") String answer) {
-        Response res = completionService.updateCompletion(id, userId, content, answer);
+                                    @RequestHeader(value = "userId") Integer userId,
+                                     MultipartHttpServletRequest mRequest) {
+        Response res = completionService.updateCompletion(id, userId, mRequest);
         logger.info("v2/update,{}",res.getMessage());
         return res;
     }

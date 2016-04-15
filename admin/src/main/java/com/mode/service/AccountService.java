@@ -10,5 +10,6 @@ public interface AccountService {
 
     public Response Login(String username, String password);
 
+    public Response getProfile(Integer userId);
 
 }

@@ -66,8 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(new AuthenticationTokenProcessingFilter(userDetailsService()),
                         UsernamePasswordAuthenticationFilter.class);
 
-        http.authorizeRequests().antMatchers("/v2/login","/v2/items").permitAll()
-                .anyRequest().hasAnyAuthority("ADMIN","MODE");
+        http.authorizeRequests().antMatchers("/system/login").permitAll()
+                .anyRequest().hasAnyAuthority("USER");
 
         http.exceptionHandling()
                 .authenticationEntryPoint(unauthorizedEntryPoint())
@@ -83,7 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private List<String> excludedUrls() {
         List<String> execludeUrls = new ArrayList<String>();
 
-        execludeUrls.add("/v2");
+        execludeUrls.add("/system");
         return execludeUrls;
     }
 }

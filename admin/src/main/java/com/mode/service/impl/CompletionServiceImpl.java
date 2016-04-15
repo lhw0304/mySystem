@@ -10,9 +10,10 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 /**
- * Created by �ľ� on 2016/3/11.
+ * Created by kang on 2016/3/11.
  */
 @Service
 public class CompletionServiceImpl implements CompletionService{
@@ -21,11 +22,13 @@ public class CompletionServiceImpl implements CompletionService{
     private CompletionDAO completionDAO;
 
     @Override
-    public Response createCompletion(Integer userId, String content, String answer) {
+    public Response createCompletion(Integer userId, MultipartHttpServletRequest mRequest) {
         Response res = new Response();
-        try {
+//        try {
             Completion completion = new Completion();
             completion.setUserId(userId);
+            String content = mRequest.getParameter("content");
+            String answer = mRequest.getParameter("answer");
             completion.setContent(content);
             completion.setAnswer(answer);
             long now = System.currentTimeMillis();
@@ -35,10 +38,10 @@ public class CompletionServiceImpl implements CompletionService{
                 res.setMessage(Message.DATABASE);
             }
             res.setMessage(Message.SUCCESS);
-        } catch (Exception e) {
-            e.printStackTrace();
-            res.setMessage(Message.CATCH);
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            res.setMessage(Message.CATCH);
+//        }
         return res;
     }
 
@@ -80,7 +83,7 @@ public class CompletionServiceImpl implements CompletionService{
     @Override
     public Response getCompletionList(Integer userId, Integer limit, Integer offset) {
         Response res = new Response();
-        try {
+//        try {
             List<Completion> list = completionDAO.getCompletionListByUserId(userId, limit, offset);
             if(list.isEmpty()) {
                 res.setMessage(Message.NO_MORE_COMPLETION);
@@ -91,15 +94,15 @@ public class CompletionServiceImpl implements CompletionService{
             payload.put("count",count);
             res.setPayload(payload);
             res.setMessage(Message.SUCCESS);
-        } catch (Exception e) {
-            e.printStackTrace();
-            res.setMessage(Message.CATCH);
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            res.setMessage(Message.CATCH);
+//        }
         return res;
     }
 
     @Override
-    public Response updateCompletion(Integer id, Integer userId, String content, String answer) {
+    public Response updateCompletion(Integer id, Integer userId, MultipartHttpServletRequest mRequest) {
         Response res = new Response();
         try {
             Completion completion = completionDAO.getCompletion(id);
@@ -108,6 +111,8 @@ public class CompletionServiceImpl implements CompletionService{
                 res.setMessage(Message.ACCOUNT_NOT_ACTIVATED);
                 return res;
             }
+            String content = mRequest.getParameter("content");
+            String answer = mRequest.getParameter("answer");
             completion.setContent(content);
             completion.setAnswer(answer);
             Integer success = completionDAO.updateCompletion(completion);

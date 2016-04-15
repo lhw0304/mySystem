@@ -7,6 +7,7 @@ import com.mode.entity.MultiSelect;
 import com.mode.service.MultiSelectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,11 +23,17 @@ public class MultiSelectServiceImpl implements MultiSelectService{
     private MultiSelectDAO multiSelectDAO;
 
     @Override
-    public Response createMultiSelect(Integer userId, String content, String a, String b, String c, String d, String answer) {
+    public Response createMultiSelect(Integer userId, MultipartHttpServletRequest mRequest) {
         Response res = new Response();
         try {
             MultiSelect multiSelect = new MultiSelect();
             multiSelect.setUserId(userId);
+            String content = mRequest.getParameter("content");
+            String a = mRequest.getParameter("A");
+            String b = mRequest.getParameter("B");
+            String c = mRequest.getParameter("C");
+            String d = mRequest.getParameter("D");
+            String answer = mRequest.getParameter("answer");
             multiSelect.setContent(content);
             multiSelect.setA(a);
             multiSelect.setA(b);
@@ -88,7 +95,7 @@ public class MultiSelectServiceImpl implements MultiSelectService{
     @Override
     public Response getMultiSelectList(Integer userId, Integer limit, Integer offset) {
         Response res = new Response();
-        try {
+//        try {
             List<MultiSelect> list = multiSelectDAO.getMultiSelectListByUserId(userId, limit, offset);
             if (list.isEmpty() || list.size() == 0) {
                 res.setMessage(Message.NO_MORE_SINGLE_SELECT);
@@ -100,15 +107,14 @@ public class MultiSelectServiceImpl implements MultiSelectService{
             payload.put("total",total);
             res.setMessage(Message.SUCCESS);
             res.setPayload(payload);
-        } catch (Exception e) {
-            e.printStackTrace();
-            res.setMessage(Message.CATCH);
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            res.setMessage(Message.CATCH);
+//        }
         return res;
     }
 
-    public Response updateMultiSelect(Integer id, Integer userId, String content, String a, String b,
-                                      String c, String d, String answer) {
+    public Response updateMultiSelect(Integer id, Integer userId, MultipartHttpServletRequest mRequest) {
         Response res = new Response();
         try {
             MultiSelect multiSelect = multiSelectDAO.getMultiSelect(id);
@@ -117,6 +123,12 @@ public class MultiSelectServiceImpl implements MultiSelectService{
                 res.setMessage(Message.SUCCESS);
                 return res;
             }
+            String content = mRequest.getParameter("content");
+            String a = mRequest.getParameter("A");
+            String b = mRequest.getParameter("B");
+            String c = mRequest.getParameter("C");
+            String d = mRequest.getParameter("D");
+            String answer = mRequest.getParameter("answer");
             multiSelect.setContent(content);
             multiSelect.setA(a);
             multiSelect.setA(b);

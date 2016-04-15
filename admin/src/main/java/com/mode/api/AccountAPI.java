@@ -15,7 +15,7 @@ import com.mode.service.AccountService;
 
 
 @RestController
-@RequestMapping("/v2")
+@RequestMapping("/system")
 public class AccountAPI {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -31,4 +31,10 @@ public class AccountAPI {
         return res;
     }
 
+    @RequestMapping(value = "/profile/{userId}", method = RequestMethod.GET)
+    public Response getProfile(@PathVariable Integer userId) {
+        Response res = accountService.getProfile(userId);
+        logger.info("/v2/profile, {}, {}, {}", res.getMessage(), userId);
+        return res;
+    }
 }

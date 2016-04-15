@@ -1,13 +1,14 @@
 package com.mode.service;
 
 import com.mode.config.Response;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 /**
- * Created by нд╬Щ on 2016/3/11.
+ * Created by О©╫д╬О©╫ on 2016/3/11.
  */
 public interface CompletionService {
 
-    public Response createCompletion(Integer userId, String content, String answer);
+    public Response createCompletion(Integer userId, MultipartHttpServletRequest mRequest);
 
     public Response deleteCompletion(Integer id);
 
@@ -15,5 +16,5 @@ public interface CompletionService {
 
     public Response getCompletionList(Integer userId, Integer limit, Integer offset);
 
-    public Response updateCompletion(Integer id, Integer userId, String content, String answer);
+    public Response updateCompletion(Integer id, Integer userId, MultipartHttpServletRequest mRequest);
 }

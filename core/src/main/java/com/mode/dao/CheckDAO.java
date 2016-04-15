@@ -30,8 +30,9 @@ public interface CheckDAO {
 
     @Select({"<script>",
             "SELECT * FROM md_check WHERE user_id = #{userId}",
-            "<if test='limit != null'> AND limit  #{limit} </if>",
-            "<if test='offset != null'> AND offset  #{offset} </if>",
+            " order by ctime desc",
+            "<if test='limit != null'>  LIMIT  #{limit}</if>",
+            "<if test='offset != null'> OFFSET  #{offset}</if>",
             "</script>"})
     @Results({
             @Result(property = "id", column = "id"),

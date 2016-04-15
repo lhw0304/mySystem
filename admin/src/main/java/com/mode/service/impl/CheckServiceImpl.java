@@ -7,6 +7,7 @@ import com.mode.entity.Check;
 import com.mode.service.CheckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.HashMap;
 import java.util.List;
@@ -22,11 +23,12 @@ public class CheckServiceImpl implements CheckService{
     private CheckDAO checkDAO;
 
     @Override
-    public Response createCheck(Integer userId, String content, Integer answer) {
+    public Response createCheck(Integer userId, MultipartHttpServletRequest mRequest, Integer answer) {
         Response res = new Response();
         try{
             Check check = new Check();
             check.setUserId(userId);
+            String content = mRequest.getParameter("content");
             check.setContent(content);
             check.setAnswer(answer);
             long now = System.currentTimeMillis();
@@ -101,7 +103,7 @@ public class CheckServiceImpl implements CheckService{
     }
 
     @Override
-    public Response updateCheck(Integer id, Integer userId, String content, Integer answer) {
+    public Response updateCheck(Integer id, Integer userId, MultipartHttpServletRequest mRequest, Integer answer) {
         Response res = new Response();
         try {
             Check check = new Check();
@@ -109,6 +111,7 @@ public class CheckServiceImpl implements CheckService{
             if(user != userId ) {
                 res.setMessage(Message.NOT_MATCH);
             }
+            String content = mRequest.getParameter("content");
             check.setContent(content);
             check.setAnswer(answer);
             Integer success = checkDAO.updateCheck(check);

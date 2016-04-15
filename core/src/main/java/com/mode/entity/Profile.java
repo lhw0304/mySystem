@@ -12,11 +12,15 @@ public class Profile {
 
     private String description;
 
+    private String nickname;
+
     private String gender;
 
     private long ctime;
 
     private long utime;
+
+    private String role;
 
     public Integer getProfileId() {
         return profileId;
@@ -72,6 +76,22 @@ public class Profile {
 
     public void setUtime(long utime) {
         this.utime = utime;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override

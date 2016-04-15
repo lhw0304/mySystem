@@ -7,12 +7,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 /**
  * Created by Administrator on 2016/3/17.
  */
 @RestController
-@RequestMapping("/multiselect")
+@RequestMapping("/system/multi")
 public class MultiSelectAPI {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -22,13 +23,8 @@ public class MultiSelectAPI {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public Response createMultiSelect(@RequestHeader(value = "user_id") Integer userId,
-                                       @RequestHeader(value = "content") String content,
-                                       @RequestHeader(value = "a") String a,
-                                       @RequestHeader(value = "b") String b,
-                                       @RequestHeader(value = "c") String c,
-                                       @RequestHeader(value = "d") String d,
-                                       @RequestHeader(value = "answer") String answer) {
-        Response res = multiSelectService.createMultiSelect(userId, content, a, b, c, d, answer);
+                                      MultipartHttpServletRequest mRequest) {
+        Response res = multiSelectService.createMultiSelect(userId, mRequest);
         logger.info("v2/singleselect/create,{}",res.getMessage());
         return res;
     }
@@ -59,13 +55,8 @@ public class MultiSelectAPI {
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     public Response updateMultiSelect(@PathVariable Integer id,
                                        @RequestHeader(value = "userId") Integer userId,
-                                       @RequestHeader(value = "content", required = false) String content,
-                                       @RequestHeader(value = "a", required = false) String a,
-                                       @RequestHeader(value = "b", required = false) String b,
-                                       @RequestHeader(value = "c", required = false) String c,
-                                       @RequestHeader(value = "d", required = false) String d,
-                                       @RequestHeader(value = "answer", required = false) String answer) {
-        Response res = multiSelectService.updateMultiSelect(id, userId, content, a, b, c, d, answer);
+                                      MultipartHttpServletRequest mRequest) {
+        Response res = multiSelectService.updateMultiSelect(id, userId, mRequest);
         logger.info("v2/singleselect/update/{id},{}",res.getMessage());
         return res;
     }

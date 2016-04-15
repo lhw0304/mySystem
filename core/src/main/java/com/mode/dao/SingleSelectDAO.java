@@ -17,9 +17,10 @@ import org.apache.ibatis.annotations.Update;
 public interface SingleSelectDAO {
 
     @Select({"<script>",
-            "SELECT * FROM md_single_select WHERE user_id = #{userId}",
-            "<if test='limit != null'> AND limit  #{limit} </if>",
-            "<if test='offset != null'> AND offset  #{offset} </if>",
+            "SELECT * FROM md_single_select WHERE user_id = #{userId} ",
+            "order by ctime desc ",
+            "<if test='limit != null'>limit #{limit} </if>",
+            "<if test='offset != null'>offset #{offset} </if>",
             "</script>"})
     @Results({
             @Result(property = "id", column = "id"),

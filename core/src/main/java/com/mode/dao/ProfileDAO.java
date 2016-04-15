@@ -18,7 +18,6 @@ public interface ProfileDAO {
             @Result(property = "userId", column = "user_id"),
             @Result(property = "nickname", column = "nickname"),
             @Result(property = "gender", column = "gender"),
-            @Result(property = "credits", column = "credits"),
             @Result(property = "ctime", column = "ctime"),
             @Result(property = "utime", column = "utime"),
             @Result(property = "description", column = "description"),
