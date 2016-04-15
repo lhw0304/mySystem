@@ -49,17 +49,17 @@ public class ShortAnswerServiceImpl implements ShortAnswerService{
     @Override
     public Response deleteShortAnswer(Integer id) {
         Response res = new Response();
-//        try {
+        try {
             Integer success = shortAnswerDAO.deleteShortAnswer(id);
             if(success == 0) {
                 res.setMessage(Message.DATABASE);
                 return res;
             }
             res.setMessage(Message.SUCCESS);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            res.setMessage(Message.CATCH);
-//        }
+        } catch (Exception e) {
+            e.printStackTrace();
+            res.setMessage(Message.CATCH);
+        }
         return res;
     }
 
