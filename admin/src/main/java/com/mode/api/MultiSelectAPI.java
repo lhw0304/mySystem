@@ -22,7 +22,7 @@ public class MultiSelectAPI {
     private MultiSelectService multiSelectService;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public Response createMultiSelect(@RequestHeader(value = "user_id") Integer userId,
+    public Response createMultiSelect(@RequestHeader(value = "userId") Integer userId,
                                       MultipartHttpServletRequest mRequest) {
         Response res = multiSelectService.createMultiSelect(userId, mRequest);
         logger.info("v2/singleselect/create,{}",res.getMessage());
@@ -30,7 +30,7 @@ public class MultiSelectAPI {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    public Response deleteMultiSelect(@RequestHeader(value = "id") Integer id) {
+    public Response deleteMultiSelect(@PathVariable Integer id) {
         Response res = multiSelectService.deleteMultiSelect(id);
         logger.info("v2/multiselect/delete/{id},{}",res.getMessage());
         return res;

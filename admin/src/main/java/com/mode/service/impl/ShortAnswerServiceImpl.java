@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 /**
  * Created by �ľ� on 2016/3/11.
@@ -21,12 +22,14 @@ public class ShortAnswerServiceImpl implements ShortAnswerService{
     private ShortAnswerDAO shortAnswerDAO;
 
     @Override
-    public Response createShortAnswer(Integer userId, String content, String answer) {
+    public Response createShortAnswer(Integer userId, MultipartHttpServletRequest mRequest) {
         Response res = new Response();
         try {
             ShortAnswer shortAnswer = new ShortAnswer();
             long now = System.currentTimeMillis();
             shortAnswer.setUserId(userId);
+            String content = mRequest.getParameter("content");
+            String answer = mRequest.getParameter("answer");
             shortAnswer.setContent(content);
             shortAnswer.setAnswer(answer);
             shortAnswer.setCtime(now);
@@ -46,17 +49,17 @@ public class ShortAnswerServiceImpl implements ShortAnswerService{
     @Override
     public Response deleteShortAnswer(Integer id) {
         Response res = new Response();
-        try {
+//        try {
             Integer success = shortAnswerDAO.deleteShortAnswer(id);
             if(success == 0) {
                 res.setMessage(Message.DATABASE);
                 return res;
             }
             res.setMessage(Message.SUCCESS);
-        } catch (Exception e) {
-            e.printStackTrace();
-            res.setMessage(Message.CATCH);
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            res.setMessage(Message.CATCH);
+//        }
         return res;
     }
 
@@ -104,7 +107,7 @@ public class ShortAnswerServiceImpl implements ShortAnswerService{
     }
 
     @Override
-    public Response updateShortAnswer(Integer id, Integer userId, String content, String answer) {
+    public Response updateShortAnswer(Integer id, Integer userId,MultipartHttpServletRequest mRequest) {
         Response res = new Response();
         try {
             ShortAnswer shortAnswer = shortAnswerDAO.getShortAnswer(id);
@@ -113,6 +116,8 @@ public class ShortAnswerServiceImpl implements ShortAnswerService{
                 res.setMessage(Message.ACCOUNT_NOT_ACTIVATED);
                 return res;
             }
+            String content = mRequest.getParameter("content");
+            String answer = mRequest.getParameter("answer");
             shortAnswer.setContent(content);
             shortAnswer.setAnswer(answer);
             Integer success = shortAnswerDAO.updateShortAnswer(shortAnswer);

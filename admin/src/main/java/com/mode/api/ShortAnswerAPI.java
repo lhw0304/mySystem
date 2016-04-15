@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 /**
- * Created by нд╬Щ on 2016/3/11.
+ * Created by О©╫д╬О©╫ on 2016/3/11.
  */
 @RestController
-@RequestMapping("/short")
+@RequestMapping("/system/short")
 public class ShortAnswerAPI {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -24,10 +25,9 @@ public class ShortAnswerAPI {
     private ShortAnswerService shortAnswerService;
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public Response createShortAnswer(@RequestHeader(value = "user_id") Integer userId,
-                                @RequestHeader(value = "content") String content,
-                                @RequestHeader(value = "answer") String answer) {
-        Response res = shortAnswerService.createShortAnswer(userId, content, answer);
+    public Response createShortAnswer(@RequestHeader(value = "userId") Integer userId,
+                                      MultipartHttpServletRequest mRequest) {
+        Response res = shortAnswerService.createShortAnswer(userId, mRequest);
         logger.info("v2/create,{}",res.getMessage());
         return res;
     }
@@ -58,9 +58,8 @@ public class ShortAnswerAPI {
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     public Response updateShortAnswer(@PathVariable Integer id,
                                 @RequestHeader(value = "userId") Integer userId,
-                                @RequestHeader(value = "content", required = false) String content,
-                                @RequestHeader(value = "answer", required = false) String answer) {
-        Response res = shortAnswerService.updateShortAnswer(id, userId, content, answer);
+                                      MultipartHttpServletRequest mRequest) {
+        Response res = shortAnswerService.updateShortAnswer(id, userId, mRequest);
         logger.info("v2/check/update/{id},{}",res.getMessage());
         return res;
     }

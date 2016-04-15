@@ -25,7 +25,7 @@ public class MultiSelectServiceImpl implements MultiSelectService{
     @Override
     public Response createMultiSelect(Integer userId, MultipartHttpServletRequest mRequest) {
         Response res = new Response();
-        try {
+//        try {
             MultiSelect multiSelect = new MultiSelect();
             multiSelect.setUserId(userId);
             String content = mRequest.getParameter("content");
@@ -36,9 +36,9 @@ public class MultiSelectServiceImpl implements MultiSelectService{
             String answer = mRequest.getParameter("answer");
             multiSelect.setContent(content);
             multiSelect.setA(a);
-            multiSelect.setA(b);
-            multiSelect.setA(c);
-            multiSelect.setA(d);
+            multiSelect.setB(b);
+            multiSelect.setC(c);
+            multiSelect.setD(d);
             multiSelect.setAnswer(answer);
             final long now = System.currentTimeMillis();
             multiSelect.setCtime(now);
@@ -48,10 +48,10 @@ public class MultiSelectServiceImpl implements MultiSelectService{
                 return res;
             }
             res.setMessage(Message.SUCCESS);
-        } catch (Exception e) {
-            e.printStackTrace();
-            res.setMessage(Message.CATCH);
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            res.setMessage(Message.CATCH);
+//        }
         return res;
     }
 
