@@ -40,26 +40,23 @@ public class GroupServiceImpl implements GroupService{
     @Autowired
     private ShortAnswerDAO shortAnswerDAO;
 
-    @Autowired
-    private EssayDAO essayDAO;
 
     @Override
     public Response createGroup(Integer userId, Integer checkCount,Integer completionCount,
                                 Integer singleSelectCount, Integer multiSelectCount, Integer
-                                        shortAnswerCount, Integer essayCount) {
+                                        shortAnswerCount) {
         Response res = new Response();
-        try {
-            List<Completion> completionList = completionDAO.getGroupList(userId, checkCount);
-
+//        try {
             List<Check> checkList = checkDAO.getGroupList(userId, checkCount);
 
-            List<SingleSelect> singleSelectList = singleSelectDAO.getGroupList(userId, checkCount);
+            List<Completion> completionList = completionDAO.getGroupList(userId, completionCount);
 
-            List<MultiSelect> multiSelectList = multiSelectDAO.getGroupList(userId, checkCount);
+            List<SingleSelect> singleSelectList = singleSelectDAO.getGroupList(userId, singleSelectCount);
 
-            List<ShortAnswer> shortAnswerList = shortAnswerDAO.getGroupList(userId, checkCount);
+            List<MultiSelect> multiSelectList = multiSelectDAO.getGroupList(userId, multiSelectCount);
 
-            List<Essay> essayList = essayDAO.getGroupList(userId, checkCount);
+            List<ShortAnswer> shortAnswerList = shortAnswerDAO.getGroupList(userId, shortAnswerCount);
+
 
             Map<String, Object> payload = new HashMap<>();
             payload.put("completionList",completionList);
@@ -67,13 +64,12 @@ public class GroupServiceImpl implements GroupService{
             payload.put("singleSelectList",singleSelectList);
             payload.put("multiSelectList",multiSelectList);
             payload.put("shortAnswerList",shortAnswerList);
-            payload.put("essayList",essayList);
             res.setPayload(payload);
             res.setMessage(Message.SUCCESS);
-        } catch (Exception e) {
-            e.printStackTrace();
-            res.setMessage(Message.CATCH);
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            res.setMessage(Message.CATCH);
+//        }
         return res;
     }
 }

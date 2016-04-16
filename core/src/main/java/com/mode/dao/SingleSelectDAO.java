@@ -82,7 +82,7 @@ public interface SingleSelectDAO {
 
     @Select({
             "<script>",
-            "select * from md_single_select where user_id = #{userId} order by rand() limit 0 #{limit}",
+            "select * from md_single_select where user_id = #{userId} order by rand() limit #{limit}",
             "</script>"
     })
     public List<SingleSelect> getGroupList(@Param("userId") Integer userId,

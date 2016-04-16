@@ -63,7 +63,7 @@ public interface CompletionDAO {
 
     @Select({
             "<script>",
-            "select * from md_completion where user_id = #{userId} order by rand() limit 0 #{limit}",
+            "select * from md_completion where user_id = #{userId} order by rand() limit #{limit}",
             "</script>"
     })
     public List<Completion> getGroupList(@Param("userId") Integer userId,

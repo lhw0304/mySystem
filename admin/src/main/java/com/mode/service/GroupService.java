@@ -9,5 +9,5 @@ public interface GroupService {
 
     public Response createGroup(Integer userId, Integer checkCount,Integer completionCount,
                                 Integer singleSelectCount, Integer multiSelectCount, Integer
-                                        shortAnswerCount, Integer essayCount);
+                                        shortAnswerCount);
 }

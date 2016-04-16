@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by kang on 2016/3/25.
  */
 @RestController
-@RequestMapping("/group")
+@RequestMapping("/system/group")
 public class GroupAPI {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -22,8 +22,8 @@ public class GroupAPI {
     @Autowired
     private GroupService groupService;
 
-    @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public Response createMultiSelect(@RequestHeader(value = "user_id") Integer userId,
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public Response createMultiSelect(@RequestHeader(value = "userId") Integer userId,
                                       @RequestHeader(value = "checkCount") Integer checkCount,
                                       @RequestHeader(value = "completionCount") Integer
                                                   completionCount,
@@ -32,10 +32,9 @@ public class GroupAPI {
                                       @RequestHeader(value = "multiSelectCount") Integer
                                                   multiSelectCount,
                                       @RequestHeader(value = "shortAnswerCount") Integer
-                                                  shortAnswerCount,
-                                      @RequestHeader(value = "essayCount") Integer essayCount) {
+                                                  shortAnswerCount) {
         Response res = groupService.createGroup(userId, checkCount, completionCount,
-                singleSelectCount, multiSelectCount, shortAnswerCount,essayCount);
+                singleSelectCount, multiSelectCount, shortAnswerCount);
         logger.info("/v2/group/create,{}",res.getMessage());
         return res;
     }
