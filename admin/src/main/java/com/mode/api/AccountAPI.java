@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mode.config.Response;
 import com.mode.service.AccountService;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 
 @RestController
@@ -35,6 +36,32 @@ public class AccountAPI {
     public Response getProfile(@PathVariable Integer userId) {
         Response res = accountService.getProfile(userId);
         logger.info("/v2/profile, {}, {}, {}", res.getMessage(), userId);
+        return res;
+    }
+
+    @RequestMapping(value = "/add/account", method = RequestMethod.POST)
+    public Response addAccount(@RequestHeader(value = "username") String username,
+                               MultipartHttpServletRequest mRequest) {
+        Response res = accountService.addAccount(username, mRequest);
+        logger.info("/system/add/account,{},{}", res.getMessage(), username);
+        return res;
+    }
+
+    @RequestMapping(value = "/profile/{userId}", method = RequestMethod.POST)
+    public Response updateProfile(@PathVariable Integer userId,
+                                  MultipartHttpServletRequest mRequest) {
+        Response res = accountService.updateProfile(userId, mRequest);
+        logger.info("/v2/profile, {}, {}, {}", res.getMessage(), userId);
+        return res;
+    }
+
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+    public Response changePassword(@RequestHeader("userId") Integer userId,
+                                   @RequestHeader("oldPassword") String oldPassword,
+                                   @RequestHeader("newPassword") String newPassword) {
+        Response res = accountService.changePassword(userId, oldPassword, newPassword);
+        logger.info("/v2/login, {}, {}, {}, {}", userId, oldPassword, newPassword, res
+                .getMessage());
         return res;
     }
 }

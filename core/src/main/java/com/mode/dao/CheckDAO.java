@@ -68,4 +68,7 @@ public interface CheckDAO {
     })
     public List<Check> getGroupList(@Param("userId") Integer userId,
                                     @Param("limit") Integer limit);
+
+    @Select("select count(*) from md_check where user_id = #{userId}")
+    public Integer getCheckCount(Integer userId);
 }

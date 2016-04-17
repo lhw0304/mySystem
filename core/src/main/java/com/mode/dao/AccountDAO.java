@@ -61,8 +61,8 @@ public interface AccountDAO {
      * @param account
      * @return
      */
-    @Insert("INSERT INTO md_account (username, password, ctime, utime, locked, role, status) " +
-            "VALUES (#{username}, #{password}, #{ctime}, #{utime}, #{locked}, #{role}, #{status})")
+    @Insert("INSERT INTO md_account (username, password, ctime, utime, locked, role) " +
+            "VALUES (#{username}, #{password}, #{ctime}, #{utime}, #{locked}, #{role})")
     @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "userId", keyColumn = "user_id",
             before = false, resultType = Integer.class)
     public Integer createAccount(Account account);

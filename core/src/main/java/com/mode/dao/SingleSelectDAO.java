@@ -87,4 +87,7 @@ public interface SingleSelectDAO {
     })
     public List<SingleSelect> getGroupList(@Param("userId") Integer userId,
                                          @Param("limit") Integer limit);
+
+    @Select("select count(*) from md_single_select where user_id = #{userId}")
+    public Integer getSingleSelectCount(Integer userId);
 }

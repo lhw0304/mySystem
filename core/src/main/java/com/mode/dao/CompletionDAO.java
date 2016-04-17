@@ -68,4 +68,7 @@ public interface CompletionDAO {
     })
     public List<Completion> getGroupList(@Param("userId") Integer userId,
                                     @Param("limit") Integer limit);
+
+    @Select("select count(*) from md_completion where user_id = #{userId}")
+    public Integer getCompletionCount(Integer userId);
 }

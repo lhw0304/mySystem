@@ -2,6 +2,7 @@ package com.mode.service;
 
 import com.mode.config.Response;
 import com.mode.entity.Account;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 public interface AccountService {
 
@@ -11,5 +12,11 @@ public interface AccountService {
     public Response Login(String username, String password);
 
     public Response getProfile(Integer userId);
+
+    public Response addAccount(String username, MultipartHttpServletRequest mRequest);
+
+    public Response updateProfile(Integer userId, MultipartHttpServletRequest mRequest);
+
+    public Response changePassword(Integer username, String oldPassword, String newPassword);
 
 }

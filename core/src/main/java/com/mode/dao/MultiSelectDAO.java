@@ -79,4 +79,7 @@ public interface MultiSelectDAO {
     })
     public List<MultiSelect> getGroupList(@Param("userId") Integer userId,
                                          @Param("limit") Integer limit);
+
+    @Select("select count(*) from md_multi_select where user_id = #{userId}")
+    public Integer getMultiSelectCount(Integer userId);
 }

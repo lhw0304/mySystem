@@ -13,12 +13,7 @@ public class BaseConfig {
     public static final Integer ACCOUNT_LOCKED = 1;
 
     // Currently we have the following roles defined for the backend system users.
-    public static final String ROLE_USER = "USER";
-    public static final String ROLE_ADMIN = "ADMIN";
-    public static final String ROLE_MERCHANT = "MERCHANT";
-    public static final String ROLE_STYLIST = "STYLIST";
-    public static final String ROLE_MODE = "MODE";
-    public static final String ROLE_BRAND = "BRAND";
+    public static final String ROLE_USER = "USER";;
 
     // The default expire window for an access token. User will need to input the login username
     // and credentials again to refresh the token when it expires.

@@ -68,4 +68,7 @@ public interface ShortAnswerDAO {
     })
     public List<ShortAnswer> getGroupList(@Param("userId") Integer userId,
                                          @Param("limit") Integer limit);
+
+    @Select("select count(*) from md_short_answer where user_id = #{userId}")
+    public Integer getShortAnswerCount(Integer userId);
 }
