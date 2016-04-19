@@ -315,4 +315,20 @@ public class AccountServiceImpl implements AccountService {
         }
         return res;
     }
+
+    @Override
+    public Response deleteAccount(String username) {
+        Response res = new Response();
+        try {
+            Account account = accountDAO.getAccountByUsername(username);
+            Integer userId = account.getUserId();
+            profileDAO.deleteProfile(userId);
+            accountDAO.deleteAccount(userId);
+            res.setMessage(Message.SUCCESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            res.setMessage(Message.CATCH);
+        }
+        return res;
+    }
 }

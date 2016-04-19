@@ -20,6 +20,8 @@ public class SingleSelect {
 
     private String answer;
 
+    private String knowledge;
+
     private long ctime;
 
     public Integer getId() {
@@ -94,6 +96,14 @@ public class SingleSelect {
         this.userId = userId;
     }
 
+    public String getKnowledge() {
+        return knowledge;
+    }
+
+    public void setKnowledge(String knowledge) {
+        this.knowledge = knowledge;
+    }
+
     @Override
     public String toString() {
         return "SingleSelect{" +
@@ -105,6 +115,7 @@ public class SingleSelect {
                 ", c='" + c + '\'' +
                 ", d='" + d + '\'' +
                 ", answer='" + answer + '\'' +
+                ", knowledge='" + knowledge + '\'' +
                 ", ctime=" + ctime +
                 '}';
     }

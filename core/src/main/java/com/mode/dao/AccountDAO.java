@@ -102,12 +102,6 @@ public interface AccountDAO {
                                   @Param("password") String password);
 
 
-
-
-    @Update("UPDATE md_account SET role = #{role} WHERE user_id = #{userId}")
-    public Integer updateUserRole(@Param("userId") Integer userId,
-                                  @Param("role") String role);
-
     @Select({
             "<script>",
             "SELECT * FROM md_account ",

@@ -73,4 +73,11 @@ public class AccountAPI {
                 .getMessage());
         return res;
     }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public Response deleteAccount(@RequestHeader("username") String username) {
+        Response res = accountService.deleteAccount(username);
+        logger.info("/system/reset, {}, {}, {}, {}", username, res.getMessage());
+        return res;
+    }
 }

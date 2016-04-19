@@ -10,8 +10,8 @@ import java.util.List;
  */
 public interface CheckDAO {
 
-    @Insert("INSERT INTO md_check(user_id,content,answer,ctime) VALUES(#{userId},#{content}," +
-            "#{answer},#{ctime})")
+    @Insert("INSERT INTO md_check(user_id,content,answer,knowledge,ctime) VALUES(#{userId},#{content}," +
+            "#{answer},#{knowledge},#{ctime})")
     @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", keyColumn = "id",
             before = false, resultType = Integer.class)
     public Integer createCheck(Check check);
@@ -25,6 +25,7 @@ public interface CheckDAO {
             @Result(property = "userId", column = "user_id"),
             @Result(property = "content", column = "content"),
             @Result(property = "answer", column = "answer"),
+            @Result(property = "knowledge", column = "knowledge"),
             @Result(property = "ctime", column = "ctime")})
     public Check getCheck(@Param("id") Integer id);
 
@@ -42,6 +43,7 @@ public interface CheckDAO {
             @Result(property = "userId", column = "user_id"),
             @Result(property = "content", column = "content"),
             @Result(property = "answer", column = "answer"),
+            @Result(property = "knowledge", column = "knowledge"),
             @Result(property = "ctime", column = "ctime")})
     public List<Check> getCheckListByUserId(@Param("userId") Integer userId,
                                                         @Param("limit") Integer limit,

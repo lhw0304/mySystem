@@ -9,8 +9,8 @@ import java.util.List;
  * Created by Administrator on 2016/3/8.
  */
 public interface MultiSelectDAO {
-    @Insert("INSERT INTO md_multi_select(user_id,content,a,b,c,d,answer,ctime) VALUES(#{userId},#{content},#{a},#{b}," +
-            "#{c},#{d},#{answer},#{ctime})")
+    @Insert("INSERT INTO md_multi_select(user_id,content,a,b,c,d,answer,knowledge,ctime) VALUES(#{userId},#{content},#{a},#{b}," +
+            "#{c},#{d},#{answer},#{knowledge},#{ctime})")
     @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", keyColumn = "id",
             before = false, resultType = Integer.class)
     public Integer createMultiSelect(MultiSelect multiSelect);
@@ -28,6 +28,7 @@ public interface MultiSelectDAO {
             @Result(property = "c", column = "c"),
             @Result(property = "d", column = "d"),
             @Result(property = "answer", column = "answer"),
+            @Result(property = "knowledge", column = "knowledge"),
             @Result(property = "ctime", column = "ctime")})
     public MultiSelect getMultiSelect(@Param("id") Integer id);
 
@@ -49,6 +50,7 @@ public interface MultiSelectDAO {
             @Result(property = "c", column = "c"),
             @Result(property = "d", column = "d"),
             @Result(property = "answer", column = "answer"),
+            @Result(property = "knowledge", column = "knowledge"),
             @Result(property = "ctime", column = "ctime")})
     public List<MultiSelect> getMultiSelectListByUserId(@Param("userId") Integer userId,
                                                           @Param("limit") Integer limit,

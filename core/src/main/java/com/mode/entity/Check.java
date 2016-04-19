@@ -12,6 +12,8 @@ public class Check {
 
     private Integer answer;
 
+    private String knowledge;
+
     private long ctime;
 
     public Integer getUserId() {
@@ -54,6 +56,14 @@ public class Check {
         this.ctime = ctime;
     }
 
+    public String getKnowledge() {
+        return knowledge;
+    }
+
+    public void setKnowledge(String knowledge) {
+        this.knowledge = knowledge;
+    }
+
     @Override
     public String toString() {
         return "Check{" +
@@ -61,6 +71,7 @@ public class Check {
                 ", userId=" + userId +
                 ", content='" + content + '\'' +
                 ", answer=" + answer +
+                ", knowledge='" + knowledge + '\'' +
                 ", ctime=" + ctime +
                 '}';
     }

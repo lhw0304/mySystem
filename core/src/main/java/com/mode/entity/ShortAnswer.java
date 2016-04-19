@@ -13,6 +13,8 @@ public class ShortAnswer {
 
     private String answer;
 
+    private String knowledge;
+
     private long ctime;
 
     public Integer getId() {
@@ -47,6 +49,14 @@ public class ShortAnswer {
         this.answer = answer;
     }
 
+    public String getKnowledge() {
+        return knowledge;
+    }
+
+    public void setKnowledge(String knowledge) {
+        this.knowledge = knowledge;
+    }
+
     public long getCtime() {
         return ctime;
     }
@@ -62,6 +72,7 @@ public class ShortAnswer {
                 ", userId=" + userId +
                 ", content='" + content + '\'' +
                 ", answer='" + answer + '\'' +
+                ", knowledge='" + knowledge + '\'' +
                 ", ctime=" + ctime +
                 '}';
     }

@@ -12,6 +12,8 @@ public class Completion {
 
     private String answer;
 
+    private String knowledge;
+
     private long ctime;
 
     public Integer getId() {
@@ -46,6 +48,14 @@ public class Completion {
         this.answer = answer;
     }
 
+    public String getKnowledge() {
+        return knowledge;
+    }
+
+    public void setKnowledge(String knowledge) {
+        this.knowledge = knowledge;
+    }
+
     public long getCtime() {
         return ctime;
     }
@@ -61,6 +71,7 @@ public class Completion {
                 ", userId=" + userId +
                 ", content='" + content + '\'' +
                 ", answer='" + answer + '\'' +
+                ", knowledge='" + knowledge + '\'' +
                 ", ctime=" + ctime +
                 '}';
     }

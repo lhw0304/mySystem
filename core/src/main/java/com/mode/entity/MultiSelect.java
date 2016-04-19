@@ -20,6 +20,8 @@ public class MultiSelect {
 
     private String answer;
 
+    private String knowledge;
+
     private long ctime;
 
     public Integer getId() {
@@ -86,6 +88,14 @@ public class MultiSelect {
         this.answer = answer;
     }
 
+    public String getKnowledge() {
+        return knowledge;
+    }
+
+    public void setKnowledge(String knowledge) {
+        this.knowledge = knowledge;
+    }
+
     public long getCtime() {
         return ctime;
     }
@@ -105,6 +115,7 @@ public class MultiSelect {
                 ", c='" + c + '\'' +
                 ", d='" + d + '\'' +
                 ", answer='" + answer + '\'' +
+                ", knowledge='" + knowledge + '\'' +
                 ", ctime=" + ctime +
                 '}';
     }

@@ -34,14 +34,15 @@ public interface SingleSelectDAO {
             @Result(property = "c", column = "c"),
             @Result(property = "d", column = "d"),
             @Result(property = "answer", column = "answer"),
+            @Result(property = "knowledge", column = "knowledge"),
             @Result(property = "ctime", column = "ctime")})
     public List<SingleSelect> getSingleSelectListByUserId(@Param("userId") Integer userId,
                                                           @Param("limit") Integer limit,
                                                           @Param("offset") Integer offset);
 
 
-    @Insert("INSERT INTO md_single_select(user_id,content,a,b,c,d,answer,ctime) VALUES(#{userId},#{content},#{a},#{b}," +
-            "#{c},#{d},#{answer},#{ctime})")
+    @Insert("INSERT INTO md_single_select(user_id,content,a,b,c,d,answer,knowledge,ctime) VALUES(#{userId},#{content},#{a},#{b}," +
+            "#{c},#{d},#{answer},#{knowledge},#{ctime})")
     @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", keyColumn = "id",
             before = false, resultType = Integer.class)
     public Integer createSingleSelect(SingleSelect singleSelect);
@@ -59,6 +60,7 @@ public interface SingleSelectDAO {
             @Result(property = "c", column = "c"),
             @Result(property = "d", column = "d"),
             @Result(property = "answer", column = "answer"),
+            @Result(property = "knowledge", column = "knowledge"),
             @Result(property = "ctime", column = "ctime")})
     public SingleSelect getSingleSelect(@Param("id") Integer id);
 

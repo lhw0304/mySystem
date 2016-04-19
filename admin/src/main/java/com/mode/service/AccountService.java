@@ -21,4 +21,6 @@ public interface AccountService {
 
     public Response resetPassword(String username, String password);
 
+    public Response deleteAccount(String username);
+
 }
