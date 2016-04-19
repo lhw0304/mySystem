@@ -44,7 +44,7 @@ public class MultiSelectAPI {
     }
 
     @RequestMapping(value = "/fetch/list", method = RequestMethod.GET)
-    public Response getMultiSelectList(@RequestHeader(value = "userId") Integer userId,
+    public Response getMultiSelectList(@RequestHeader(value = "userId", required = false) Integer userId,
                                         @RequestHeader(value = "limit", required = false) Integer limit,
                                         @RequestHeader(value = "offset", required = false) Integer offset) {
         Response res = multiSelectService.getMultiSelectList(userId, limit, offset);

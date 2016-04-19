@@ -32,7 +32,10 @@ public interface MultiSelectDAO {
     public MultiSelect getMultiSelect(@Param("id") Integer id);
 
     @Select({"<script>",
-            "SELECT * FROM md_multi_select WHERE user_id = #{userId}",
+            "SELECT * FROM md_multi_select ",
+            "<where>",
+            "<if test='userId != null'> user_id = #{userId} </if>",
+            "</where>",
             "order by ctime desc",
             "<if test='limit != null'> limit #{limit} </if>",
             "<if test='offset != null'> offset #{offset} </if>",
@@ -68,7 +71,10 @@ public interface MultiSelectDAO {
 
     @Select({"<script>",
             "SELECT count(DISTINCT id) as total  ",
-            "FROM md_multi_select where user_id = #{userId} ",
+            "FROM md_multi_select  ",
+            "<where>",
+            "<if test='userId != null'> user_id = #{userId} </if>",
+            "</where>",
             "</script>"})
     public Integer countMultiSelect(@Param("userId") Integer userId);
 
@@ -80,6 +86,4 @@ public interface MultiSelectDAO {
     public List<MultiSelect> getGroupList(@Param("userId") Integer userId,
                                          @Param("limit") Integer limit);
 
-    @Select("select count(*) from md_multi_select where user_id = #{userId}")
-    public Integer getMultiSelectCount(Integer userId);
 }

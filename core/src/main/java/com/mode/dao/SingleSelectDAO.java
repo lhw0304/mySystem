@@ -17,7 +17,10 @@ import org.apache.ibatis.annotations.Update;
 public interface SingleSelectDAO {
 
     @Select({"<script>",
-            "SELECT * FROM md_single_select WHERE user_id = #{userId} ",
+            "SELECT * FROM md_single_select  ",
+            "<where>",
+            "<if test='userId != null'> user_id = #{userId} </if>",
+            "</where>",
             "order by ctime desc ",
             "<if test='limit != null'>limit #{limit} </if>",
             "<if test='offset != null'>offset #{offset} </if>",
@@ -76,7 +79,10 @@ public interface SingleSelectDAO {
 
     @Select({"<script>",
             "SELECT count(DISTINCT id) as total  ",
-            "FROM md_single_select where user_id = #{userId} ",
+            "FROM md_single_select ",
+            "<where>",
+            "<if test='userId != null'> user_id = #{userId} </if>",
+            "</where>",
             "</script>"})
     public Integer countSingleSelect(@Param("userId") Integer userId);
 
@@ -88,6 +94,4 @@ public interface SingleSelectDAO {
     public List<SingleSelect> getGroupList(@Param("userId") Integer userId,
                                          @Param("limit") Integer limit);
 
-    @Select("select count(*) from md_single_select where user_id = #{userId}")
-    public Integer getSingleSelectCount(Integer userId);
 }

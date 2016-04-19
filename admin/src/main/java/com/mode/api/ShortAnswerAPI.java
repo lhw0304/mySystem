@@ -47,7 +47,7 @@ public class ShortAnswerAPI {
     }
 
     @RequestMapping(value = "/fetch/list", method = RequestMethod.GET)
-    public Response getShortAnswerList(@RequestHeader(value = "userId") Integer userId,
+    public Response getShortAnswerList(@RequestHeader(value = "userId", required = false) Integer userId,
                                  @RequestHeader(value = "limit", required = false) Integer limit,
                                  @RequestHeader(value = "offset", required = false) Integer offset) {
         Response res = shortAnswerService.getShortAnswerList(userId, limit, offset);

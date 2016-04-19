@@ -19,4 +19,6 @@ public interface AccountService {
 
     public Response changePassword(Integer username, String oldPassword, String newPassword);
 
+    public Response resetPassword(String username, String password);
+
 }

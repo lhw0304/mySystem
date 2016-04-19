@@ -47,7 +47,7 @@ public class CompletionAPI {
     }
 
     @RequestMapping(value = "/fetch/list", method = RequestMethod.GET)
-    public Response getCompletionList(@RequestHeader(value = "userId") Integer userId,
+    public Response getCompletionList(@RequestHeader(value = "userId", required = false) Integer userId,
                                   @RequestHeader(value = "limit", required = false) Integer limit,
                                   @RequestHeader(value = "offset", required = false) Integer offset) {
         Response res = completionService.getCompletionList(userId, limit, offset);

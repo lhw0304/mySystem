@@ -29,7 +29,10 @@ public interface CheckDAO {
     public Check getCheck(@Param("id") Integer id);
 
     @Select({"<script>",
-            "SELECT * FROM md_check WHERE user_id = #{userId}",
+            "SELECT * FROM md_check ",
+            "<where>",
+            "<if test='userId != null'> user_id = #{userId} </if>",
+            "</where>",
             " order by ctime desc",
             "<if test='limit != null'>  LIMIT  #{limit}</if>",
             "<if test='offset != null'> OFFSET  #{offset}</if>",
@@ -57,7 +60,10 @@ public interface CheckDAO {
 
     @Select({"<script>",
             "SELECT count(DISTINCT id) as total  ",
-            "FROM md_check where user_id = #{userId} ",
+            "FROM md_check ",
+            "<where>",
+            "<if test='userId != null'> user_id = #{userId} </if>",
+            "</where>",
             "</script>"})
     public Integer countCheck(@Param("userId") Integer userId);
 
@@ -69,6 +75,4 @@ public interface CheckDAO {
     public List<Check> getGroupList(@Param("userId") Integer userId,
                                     @Param("limit") Integer limit);
 
-    @Select("select count(*) from md_check where user_id = #{userId}")
-    public Integer getCheckCount(Integer userId);
 }

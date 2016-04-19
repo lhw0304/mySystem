@@ -88,10 +88,10 @@ public class CompletionServiceImpl implements CompletionService{
             if(list.isEmpty()) {
                 res.setMessage(Message.NO_MORE_COMPLETION);
             }
-            Integer count = completionDAO.countCompletion(userId);
+            Integer total = completionDAO.countCompletion(userId);
             Map<String, Object> payload = new HashMap<>();
             payload.put("list",list);
-            payload.put("count",count);
+            payload.put("total",total);
             res.setPayload(payload);
             res.setMessage(Message.SUCCESS);
 //        } catch (Exception e) {

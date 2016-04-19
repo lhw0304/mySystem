@@ -43,7 +43,7 @@ public class SingleSelectAPI {
     }
 
     @RequestMapping(value = "/fetch/list", method = RequestMethod.GET)
-    public Response getSingleSelectList(@RequestHeader(value = "userId") Integer userId,
+    public Response getSingleSelectList(@RequestHeader(value = "userId", required = false) Integer userId,
                                         @RequestHeader(value = "limit", required = false) Integer limit,
                                         @RequestHeader(value = "offset", required = false) Integer offset) {
         Response res = singleSelectService.getSingleSelectList(userId, limit, offset);

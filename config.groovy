@@ -29,8 +29,8 @@ environments {
 
     test {
         jdbc {
-            url = 'jdbc:mysql://10.51.17.242:3306/mode?useUnicode=true&characterEncoding=utf-8'
-            username = 'mode'
+            url = 'jdbc:mysql://10.168.179.86:3306/system?useUnicode=true&characterEncoding=utf-8'
+            username = 'root'
             password = 'Kitetea2013'
             maxActive = '5'
             initialSize = '1'

@@ -44,7 +44,7 @@ public class CheckAPI {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public Response getCheckList(@RequestHeader(value = "userId") Integer userId,
+    public Response getCheckList(@RequestHeader(value = "userId", required = false) Integer userId,
                                  @RequestHeader(value = "limit", required = false) Integer limit,
                                  @RequestHeader(value = "offset", required = false) Integer offset) {
         Response res = checkService.getCheckList(userId, limit, offset);

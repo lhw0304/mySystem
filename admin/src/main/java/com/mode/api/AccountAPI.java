@@ -51,7 +51,7 @@ public class AccountAPI {
     public Response updateProfile(@PathVariable Integer userId,
                                   MultipartHttpServletRequest mRequest) {
         Response res = accountService.updateProfile(userId, mRequest);
-        logger.info("/v2/profile, {}, {}, {}", res.getMessage(), userId);
+        logger.info("/system/profile/{userId}, {}, {}, {}", res.getMessage(), userId);
         return res;
     }
 
@@ -60,7 +60,16 @@ public class AccountAPI {
                                    @RequestHeader("oldPassword") String oldPassword,
                                    @RequestHeader("newPassword") String newPassword) {
         Response res = accountService.changePassword(userId, oldPassword, newPassword);
-        logger.info("/v2/login, {}, {}, {}, {}", userId, oldPassword, newPassword, res
+        logger.info("/system/changePassword, {}, {}, {}, {}", userId, oldPassword, newPassword, res
+                .getMessage());
+        return res;
+    }
+
+    @RequestMapping(value = "/reset", method = RequestMethod.POST)
+    public Response resetPassword(@RequestHeader("username") String username,
+                                   @RequestHeader("password") String password) {
+        Response res = accountService.resetPassword(username, password);
+        logger.info("/system/reset, {}, {}, {}, {}", username, password, res
                 .getMessage());
         return res;
     }

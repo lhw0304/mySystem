@@ -16,7 +16,7 @@ public class Message {
     public static final Message NO_MORE_SINGLE_SELECT = new Message(6, "no more single select");
     public static final Message NO_MORE_COMPLETION = new Message(7, "no more completion");
     public static final Message NOT_MATCH = new Message(8, "not match");
-    public static final Message NO_MORE_CHECK = new Message(9, "no more single select");
+    public static final Message NO_MORE_CHECK = new Message(9, "no more check");
     public static final Message USER_EXISTS = new Message(11, "the user is exists");
     public static final Message UNAUTHORIZED = new Message(10, "UNAUTHORIZED");
     public static final Message ACCOUNT_NOT_ACTIVATED = new Message(1003, "Your account is not activated");

@@ -93,16 +93,6 @@ public interface AccountDAO {
     @Delete("DELETE FROM md_account WHERE user_id = #{userid}")
     public Integer deleteAccount(@Param("userid") Integer userid);
 
-    /**
-     * update merchant lock to unlock
-     *
-     * @param userId
-     * @return
-     */
-    @Update("UPDATE md_account SET locked =#{unLock}  " +
-            "WHERE user_id = #{userId}")
-    public Integer checkMerchant(@Param("userId") Integer userId,
-                                 @Param("unLock") Integer unLock);
 
 
     @Update("UPDATE md_account " +

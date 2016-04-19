@@ -29,7 +29,10 @@ public interface ShortAnswerDAO {
     public ShortAnswer getShortAnswer(@Param("id") Integer id);
 
     @Select({"<script>",
-            "SELECT * FROM md_short_answer WHERE user_id = #{userId}",
+            "SELECT * FROM md_short_answer ",
+            "<where>",
+            "<if test='userId != null'> user_id = #{userId} </if>",
+            "</where>",
             "order by ctime desc ",
             "<if test='limit != null'>limit #{limit} </if>",
             "<if test='offset != null'>offset #{offset} </if>",
@@ -57,7 +60,10 @@ public interface ShortAnswerDAO {
 
     @Select({"<script>",
             "SELECT count(DISTINCT id) as total  ",
-            "FROM md_short_answer where user_id = #{userId} ",
+            "FROM md_short_answer  ",
+            "<where>",
+            "<if test='userId != null'> user_id = #{userId} </if>",
+            "</where>",
             "</script>"})
     public Integer countShortAnswer(@Param("userId") Integer userId);
 
@@ -69,6 +75,4 @@ public interface ShortAnswerDAO {
     public List<ShortAnswer> getGroupList(@Param("userId") Integer userId,
                                          @Param("limit") Integer limit);
 
-    @Select("select count(*) from md_short_answer where user_id = #{userId}")
-    public Integer getShortAnswerCount(Integer userId);
 }

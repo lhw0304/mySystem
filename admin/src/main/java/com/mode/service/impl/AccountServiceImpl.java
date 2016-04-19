@@ -120,11 +120,11 @@ public class AccountServiceImpl implements AccountService {
                 res.setMessage(Message.NO_MORE_SINGLE_SELECT);
                 return res;
             }
-            Integer checkCount = checkDAO.getCheckCount(userId);
-            Integer completionCount = completionDAO.getCompletionCount(userId);
-            Integer singleCount = singleSelectDAO.getSingleSelectCount(userId);
-            Integer multiCount = multiSelectDAO.getMultiSelectCount(userId);
-            Integer shortCount = shortAnswerDAO.getShortAnswerCount(userId);
+            Integer checkCount = checkDAO.countCheck(userId);
+            Integer completionCount = completionDAO.countCompletion(userId);
+            Integer singleCount = singleSelectDAO.countSingleSelect(userId);
+            Integer multiCount = multiSelectDAO.countMultiSelect(userId);
+            Integer shortCount = shortAnswerDAO.countShortAnswer(userId);
             Map<String, Object> payload = new HashMap<>();
             payload.put("profile", profile);
             payload.put("checkCount", checkCount);
@@ -291,5 +291,28 @@ public class AccountServiceImpl implements AccountService {
 
         return res;
 
+    }
+
+    @Override
+    public Response resetPassword(String username, String password) {
+        Response res = new Response();
+        try {
+            Account account = accountDAO.getAccountByUsername(username);
+            if (account == null) {
+                res.setMessage(Message.USER_NOT_EXIST);
+                return res;
+            }
+            Integer userId = account.getUserId();
+            Integer success = accountDAO.updatePassword(userId, password);
+            if (success == 0) {
+                res.setMessage(Message.FAILURE);
+            } else {
+                res.setMessage(Message.SUCCESS);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            res.setMessage(Message.CATCH);
+        }
+        return res;
     }
 }
