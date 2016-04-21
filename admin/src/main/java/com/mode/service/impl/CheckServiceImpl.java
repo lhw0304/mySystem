@@ -29,7 +29,9 @@ public class CheckServiceImpl implements CheckService{
             Check check = new Check();
             check.setUserId(userId);
             String content = mRequest.getParameter("content");
+            String knowledge = mRequest.getParameter("knowledge");
             check.setContent(content);
+            check.setKnowledge(knowledge);
             check.setAnswer(answer);
             long now = System.currentTimeMillis();
             check.setCtime(now);

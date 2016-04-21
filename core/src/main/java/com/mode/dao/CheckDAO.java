@@ -69,6 +69,15 @@ public interface CheckDAO {
             "</script>"})
     public Integer countCheck(@Param("userId") Integer userId);
 
+    @Select({"<script>",
+            "SELECT count(DISTINCT knowledge) as total  ",
+            "FROM md_check ",
+            "<where>",
+            "<if test='userId != null'> user_id = #{userId} </if>",
+            "</where>",
+            "</script>"})
+    public Integer countCheckKnowledge(@Param("userId") Integer userId);
+
     @Select({
             "<script>",
             "select * from md_check where user_id = #{userId} order by rand() limit #{limit}",

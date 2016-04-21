@@ -102,3 +102,12 @@ CREATE TABLE `md_short_answer` (
   `ctime` BIGINT(13) DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+DROP TABLE IF EXISTS `md_knowledge`;
+CREATE TABLE `md_knowledge` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) NOT NULL COMMENT '用户id',
+  `knowledge` text NOT NULL,
+  `ctime` BIGINT(13) DEFAULT '0' COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

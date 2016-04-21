@@ -34,6 +34,8 @@ public class SingleSelectServiceImpl implements SingleSelectService{
             String c = mRequest.getParameter("C");
             String d = mRequest.getParameter("D");
             String answer = mRequest.getParameter("answer");
+            String knowledge = mRequest.getParameter("knowledge");
+            singleSelect.setKnowledge(knowledge);
             singleSelect.setContent(content);
             singleSelect.setA(a);
             singleSelect.setB(b);

@@ -24,12 +24,14 @@ public class CompletionServiceImpl implements CompletionService{
     @Override
     public Response createCompletion(Integer userId, MultipartHttpServletRequest mRequest) {
         Response res = new Response();
-//        try {
+        try {
             Completion completion = new Completion();
             completion.setUserId(userId);
             String content = mRequest.getParameter("content");
             String answer = mRequest.getParameter("answer");
+            String knowledge = mRequest.getParameter("knowledge");
             completion.setContent(content);
+            completion.setKnowledge(knowledge);
             completion.setAnswer(answer);
             long now = System.currentTimeMillis();
             completion.setCtime(now);
@@ -38,10 +40,10 @@ public class CompletionServiceImpl implements CompletionService{
                 res.setMessage(Message.DATABASE);
             }
             res.setMessage(Message.SUCCESS);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            res.setMessage(Message.CATCH);
-//        }
+        } catch (Exception e) {
+            e.printStackTrace();
+            res.setMessage(Message.CATCH);
+        }
         return res;
     }
 

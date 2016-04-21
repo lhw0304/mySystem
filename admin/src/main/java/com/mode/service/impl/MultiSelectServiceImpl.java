@@ -34,6 +34,8 @@ public class MultiSelectServiceImpl implements MultiSelectService{
             String c = mRequest.getParameter("C");
             String d = mRequest.getParameter("D");
             String answer = mRequest.getParameter("answer");
+            String knowledge = mRequest.getParameter("knowledge");
+            multiSelect.setKnowledge(knowledge);
             multiSelect.setContent(content);
             multiSelect.setA(a);
             multiSelect.setB(b);

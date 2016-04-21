@@ -10,8 +10,8 @@ import java.util.List;
  */
 public interface ShortAnswerDAO {
 
-    @Insert("INSERT INTO md_short_answer(user_id,content,answer,knowledge,ctime) VALUES(#{userId},#{content}," +
-            "#{answer},#{knowledge},#{ctime})")
+    @Insert("INSERT INTO md_short_answer(user_id,content,answer,ctime) VALUES(#{userId},#{content}," +
+            "#{answer},#{ctime})")
     @SelectKey(statement = "SELECT LAST_INSERT_ID()", keyProperty = "id", keyColumn = "id",
             before = false, resultType = Integer.class)
     public Integer createShortAnswer(ShortAnswer shortAnswer);

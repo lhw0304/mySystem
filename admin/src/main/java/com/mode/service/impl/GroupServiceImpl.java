@@ -13,6 +13,8 @@ import com.mode.entity.MultiSelect;
 import com.mode.entity.ShortAnswer;
 import com.mode.entity.SingleSelect;
 import com.mode.service.GroupService;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,30 +48,30 @@ public class GroupServiceImpl implements GroupService{
                                 Integer singleSelectCount, Integer multiSelectCount, Integer
                                         shortAnswerCount) {
         Response res = new Response();
-//        try {
-            List<Check> checkList = checkDAO.getGroupList(userId, checkCount);
+        List<Check> checkList = new ArrayList<>();
+        Integer checkKnowledgeCount = checkDAO.countCheckKnowledge(userId);
+        if (checkKnowledgeCount > checkCount) {
+            checkList = checkDAO.getGroupList(userId, checkCount);
+        }
 
-            List<Completion> completionList = completionDAO.getGroupList(userId, completionCount);
+        List<Completion> completionList = completionDAO.getGroupList(userId, completionCount);
 
-            List<SingleSelect> singleSelectList = singleSelectDAO.getGroupList(userId, singleSelectCount);
+        List<SingleSelect> singleSelectList = singleSelectDAO.getGroupList(userId, singleSelectCount);
 
-            List<MultiSelect> multiSelectList = multiSelectDAO.getGroupList(userId, multiSelectCount);
+        List<MultiSelect> multiSelectList = multiSelectDAO.getGroupList(userId, multiSelectCount);
 
-            List<ShortAnswer> shortAnswerList = shortAnswerDAO.getGroupList(userId, shortAnswerCount);
+        List<ShortAnswer> shortAnswerList = shortAnswerDAO.getGroupList(userId, shortAnswerCount);
 
 
-            Map<String, Object> payload = new HashMap<>();
-            payload.put("completionList",completionList);
-            payload.put("checkList",checkList);
-            payload.put("singleSelectList",singleSelectList);
-            payload.put("multiSelectList",multiSelectList);
-            payload.put("shortAnswerList",shortAnswerList);
-            res.setPayload(payload);
-            res.setMessage(Message.SUCCESS);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            res.setMessage(Message.CATCH);
-//        }
+        Map<String, Object> payload = new HashMap<>();
+        payload.put("completionList",completionList);
+        payload.put("checkList",checkList);
+        payload.put("singleSelectList",singleSelectList);
+        payload.put("multiSelectList",multiSelectList);
+        payload.put("shortAnswerList",shortAnswerList);
+        res.setPayload(payload);
+        res.setMessage(Message.SUCCESS);
+
         return res;
     }
 }
