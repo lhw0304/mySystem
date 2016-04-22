@@ -78,12 +78,40 @@ public interface CheckDAO {
             "</script>"})
     public Integer countCheckKnowledge(@Param("userId") Integer userId);
 
+    @Select({"<script>",
+            "SELECT  (SELECT id FROM md_check  WHERE knowledge = main.knowledge ORDER BY rand()  LIMIT 0,1) as id",
+            "FROM md_check main  ",
+            "<where>",
+            "<if test='userId != null'> user_id = #{userId} </if>",
+            "</where>",
+            "GROUP BY knowledge limit #{limit}",
+            "</script>"})
+    public List<Integer> getCheckIdList(@Param("userId") Integer userId,
+                                        @Param("limit") Integer limit);
+
+    @Select({"<script>",
+            "select * from (",
+            "SELECT (SELECT id FROM md_check  WHERE user_id = #{userId} and knowledge = main.knowledge " ,
+            "ORDER BY rand()  LIMIT 0,1) as id",
+            "FROM md_check main GROUP BY knowledge union ",
+            "(select id from md_check where user_id = #{userId} order by rand() limit #{restCount}) )a limit #{checkCount}",
+            "</script>"})
+    public List<Integer> getCheckIdList2(@Param("userId") Integer userId,
+                                        @Param("restCount") Integer restCount,
+                                        @Param("checkCount") Integer checkCount);
+
     @Select({
             "<script>",
-            "select * from md_check where user_id = #{userId} order by rand() limit #{limit}",
+            "select * from md_check where id in (${checkIds})",
             "</script>"
     })
-    public List<Check> getGroupList(@Param("userId") Integer userId,
-                                    @Param("limit") Integer limit);
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "userId", column = "user_id"),
+            @Result(property = "content", column = "content"),
+            @Result(property = "answer", column = "answer"),
+            @Result(property = "knowledge", column = "knowledge"),
+            @Result(property = "ctime", column = "ctime")})
+    public List<Check> getGroupList(@Param("checkIds") String checkIds);
 
 }

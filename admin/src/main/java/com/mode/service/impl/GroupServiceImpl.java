@@ -48,24 +48,72 @@ public class GroupServiceImpl implements GroupService{
                                 Integer singleSelectCount, Integer multiSelectCount, Integer
                                         shortAnswerCount) {
         Response res = new Response();
+        // check list
         List<Check> checkList = new ArrayList<>();
+        List<Integer> checkIds = new ArrayList<>();
         Integer checkKnowledgeCount = checkDAO.countCheckKnowledge(userId);
-        if (checkKnowledgeCount > checkCount) {
-            checkList = checkDAO.getGroupList(userId, checkCount);
+        Integer completionKnowledgeCount = completionDAO.countCompletionKnowledge(userId);
+        Integer singleKnowledgeCount = singleSelectDAO.countSingleKnowledge(userId);
+        Integer multiKnowledgeCount = multiSelectDAO.countMultiKnowledge(userId);
+        if (checkKnowledgeCount >= checkCount) {
+            checkIds = checkDAO.getCheckIdList(userId, checkCount);
+            String stringCheckIds = checkIds.toString();
+            stringCheckIds = stringCheckIds.substring(1, stringCheckIds.length()-1);
+            checkList = checkDAO.getGroupList(stringCheckIds);
+        } else {
+            checkIds = checkDAO.getCheckIdList2(userId, checkCount*2, checkCount);
+            String stringCheckIds = checkIds.toString();
+            stringCheckIds = stringCheckIds.substring(1, stringCheckIds.length()-1);
+            checkList = checkDAO.getGroupList(stringCheckIds);
         }
-
-        List<Completion> completionList = completionDAO.getGroupList(userId, completionCount);
-
-        List<SingleSelect> singleSelectList = singleSelectDAO.getGroupList(userId, singleSelectCount);
-
-        List<MultiSelect> multiSelectList = multiSelectDAO.getGroupList(userId, multiSelectCount);
+        //completion list
+        List<Completion> completionList = new ArrayList<>();
+        List<Integer> completionIds = new ArrayList<>();
+        if (completionKnowledgeCount >= completionCount) {
+            completionIds = completionDAO.getCompletionIdList(userId, completionCount);
+            String stringCompletionIds = completionIds.toString();
+            stringCompletionIds = stringCompletionIds.substring(1, stringCompletionIds.length()-1);
+            completionList = completionDAO.getGroupList(stringCompletionIds);
+        } else {
+            completionIds = completionDAO.getCompletionIdList2(userId, completionCount*2, completionCount);
+            String stringCompletionIds = completionIds.toString();
+            stringCompletionIds = stringCompletionIds.substring(1, stringCompletionIds.length()-1);
+            completionList = completionDAO.getGroupList(stringCompletionIds);
+        }
+        // single select
+        List<SingleSelect> singleSelectList = new ArrayList<>();
+        List<Integer> singleSelectIds = new ArrayList<>();
+        if (singleKnowledgeCount >= singleSelectCount) {
+            singleSelectIds = singleSelectDAO.getSingleSelectIdList(userId, singleSelectCount);
+            String stringSingleIds = singleSelectIds.toString();
+            stringSingleIds = stringSingleIds.substring(1, stringSingleIds.length()-1);
+            singleSelectList = singleSelectDAO.getGroupList(stringSingleIds);
+        } else {
+            singleSelectIds = singleSelectDAO.getSingleSelectIdList2(userId, singleSelectCount*2, singleSelectCount);
+            String stringSingleIds = singleSelectIds.toString();
+            stringSingleIds = stringSingleIds.substring(1, stringSingleIds.length()-1);
+            singleSelectList = singleSelectDAO.getGroupList(stringSingleIds);
+        }
+        // multi select
+        List<MultiSelect> multiSelectList = new ArrayList<>();
+        List<Integer> multiSelectIds = new ArrayList<>();
+        if (multiKnowledgeCount >= multiSelectCount) {
+            multiSelectIds = multiSelectDAO.getMultiSelectIdList(userId, multiSelectCount);
+            String stringMultiIds = multiSelectIds.toString();
+            stringMultiIds = stringMultiIds.substring(1, stringMultiIds.length()-1);
+            multiSelectList = multiSelectDAO.getGroupList(stringMultiIds);
+        } else {
+            multiSelectIds = multiSelectDAO.getMultiSelectIdList2(userId, multiSelectCount*2, multiSelectCount);
+            String stringMultiIds = multiSelectIds.toString();
+            stringMultiIds = stringMultiIds.substring(1, stringMultiIds.length()-1);
+            multiSelectList = multiSelectDAO.getGroupList(stringMultiIds);
+        }
 
         List<ShortAnswer> shortAnswerList = shortAnswerDAO.getGroupList(userId, shortAnswerCount);
 
-
         Map<String, Object> payload = new HashMap<>();
-        payload.put("completionList",completionList);
         payload.put("checkList",checkList);
+        payload.put("completionList",completionList);
         payload.put("singleSelectList",singleSelectList);
         payload.put("multiSelectList",multiSelectList);
         payload.put("shortAnswerList",shortAnswerList);

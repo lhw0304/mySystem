@@ -69,12 +69,49 @@ public interface CompletionDAO {
             "</script>"})
     public Integer countCompletion(@Param("userId") Integer userId);
 
+    @Select({"<script>",
+            "SELECT count(DISTINCT knowledge) as total  ",
+            "FROM md_completion ",
+            "<where>",
+            "<if test='userId != null'> user_id = #{userId} </if>",
+            "</where>",
+            "</script>"})
+    public Integer countCompletionKnowledge(@Param("userId") Integer userId);
+
+    @Select({"<script>",
+            "SELECT  (SELECT id FROM md_completion  WHERE knowledge = main.knowledge ORDER BY rand()  LIMIT 0,1) as id",
+            "FROM md_completion main  ",
+            "<where>",
+            "<if test='userId != null'> user_id = #{userId} </if>",
+            "</where>",
+            "GROUP BY knowledge limit #{limit}",
+            "</script>"})
+    public List<Integer> getCompletionIdList(@Param("userId") Integer userId,
+                                        @Param("limit") Integer limit);
+
+    @Select({"<script>",
+            "select * from (",
+            "SELECT (SELECT id FROM md_completion  WHERE user_id = #{userId} and knowledge = main.knowledge " ,
+            "ORDER BY rand()  LIMIT 0,1) as id",
+            "FROM md_completion main GROUP BY knowledge union ",
+            "(select id from md_completion where user_id = #{userId} order by rand() limit #{restCount}) )a limit #{completionCount}",
+            "</script>"})
+    public List<Integer> getCompletionIdList2(@Param("userId") Integer userId,
+                                         @Param("restCount") Integer restCount,
+                                         @Param("completionCount") Integer completionCount);
+
     @Select({
             "<script>",
-            "select * from md_completion where user_id = #{userId} order by rand() limit #{limit}",
+            "select * from md_completion where id in (${completionIds})",
             "</script>"
     })
-    public List<Completion> getGroupList(@Param("userId") Integer userId,
-                                    @Param("limit") Integer limit);
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "userId", column = "user_id"),
+            @Result(property = "content", column = "content"),
+            @Result(property = "answer", column = "answer"),
+            @Result(property = "knowledge", column = "knowledge"),
+            @Result(property = "ctime", column = "ctime")})
+    public List<Completion> getGroupList(@Param("completionIds") String completionIds);
 
 }

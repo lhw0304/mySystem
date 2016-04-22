@@ -80,12 +80,53 @@ public interface MultiSelectDAO {
             "</script>"})
     public Integer countMultiSelect(@Param("userId") Integer userId);
 
+    @Select({"<script>",
+            "SELECT count(DISTINCT knowledge) as total  ",
+            "FROM md_multi_select ",
+            "<where>",
+            "<if test='userId != null'> user_id = #{userId} </if>",
+            "</where>",
+            "</script>"})
+    public Integer countMultiKnowledge(@Param("userId") Integer userId);
+
+    @Select({"<script>",
+            "SELECT  (SELECT id FROM md_multi_select  WHERE knowledge = main.knowledge ORDER BY rand()  LIMIT 0,1) as id",
+            "FROM md_multi_select main  ",
+            "<where>",
+            "<if test='userId != null'> user_id = #{userId} </if>",
+            "</where>",
+            "GROUP BY knowledge limit #{limit}",
+            "</script>"})
+    public List<Integer> getMultiSelectIdList(@Param("userId") Integer userId,
+                                               @Param("limit") Integer limit);
+
+    @Select({"<script>",
+            "select * from (",
+            "SELECT (SELECT id FROM md_multi_select  WHERE user_id = #{userId} and knowledge = main.knowledge " ,
+            "ORDER BY rand()  LIMIT 0,1) as id",
+            "FROM md_multi_select main GROUP BY knowledge union ",
+            "(select id from md_multi_select where user_id = #{userId} order by rand() limit #{restCount}) )a limit #{multiCount}",
+            "</script>"})
+    public List<Integer> getMultiSelectIdList2(@Param("userId") Integer userId,
+                                                @Param("restCount") Integer restCount,
+                                                @Param("multiCount") Integer multiCount);
+
     @Select({
             "<script>",
-            "select * from md_multi_select where user_id = #{userId} order by rand() limit #{limit}",
+            "select * from md_multi_select where id in (${stringMultiIds})",
             "</script>"
     })
-    public List<MultiSelect> getGroupList(@Param("userId") Integer userId,
-                                         @Param("limit") Integer limit);
+    @Results({
+            @Result(property = "id", column = "id"),
+            @Result(property = "userId", column = "user_id"),
+            @Result(property = "content", column = "content"),
+            @Result(property = "a", column = "a"),
+            @Result(property = "b", column = "b"),
+            @Result(property = "c", column = "c"),
+            @Result(property = "d", column = "d"),
+            @Result(property = "answer", column = "answer"),
+            @Result(property = "knowledge", column = "knowledge"),
+            @Result(property = "ctime", column = "ctime")})
+    public List<MultiSelect> getGroupList(@Param("stringMultiIds") String stringMultiIds);
 
 }

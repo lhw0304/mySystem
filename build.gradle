@@ -4,8 +4,8 @@ subprojects {
     apply plugin: 'idea'
     apply plugin: 'eclipse'
 
-    archivesBaseName = 'platform'
-    group = 'com.mode'
+    archivesBaseName = 'system'
+    group = 'kang'
     version = '1.0'
 
     // Global settings
@@ -38,8 +38,8 @@ subprojects {
         sharedManifest = manifest {
             attributes 'Implementation-Title': "${project.name}",
                     'Implementation-Version': "${version}",
-                    'Implementation-Vendor': 'Shanghai Yedao Technology',
-                    'Built-By': 'Mode',
+                    'Implementation-Vendor': 'NEAU',
+                    'Built-By': 'Kang',
                     'Built-Date': new Date().getDateTimeString(),
                     'Built-With': "gradle-${project.getGradle().getGradleVersion()}, groovy-${GroovySystem.getVersion()}",
                     'Created-By': 'Java ' + System.getProperty('java.version') + ' (' + System.getProperty('java.vendor') + ')'
