@@ -1,0 +1,90 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <h2>个人信息 </h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="home.profile">主页</a>
+            </li>
+            <li class="active">
+                <strong>个人信息 </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="getProfileCtrl">
+
+    <div class="row m-b-lg m-t-lg">
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
+            <div class="profile-info">
+                <div class="">
+                    <div>
+                        <h4>{{nickname}}</h4>
+                        <p style="font-size:16px;" id="description">
+                            {{description}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <a ui-sref="home.updateprofile">
+                <img src="img/updateprofile.png" width="20" height="20"/>
+            </a>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="m-t-lg"></div>
+            <!-- <label style="color:#c8cbca;font-size:16px;">Information</label>-->
+            <HR width="100%" color="grey" SIZE=10 style="border-color:grey;"/>
+            <table style="text-align:left;align:center;">
+                <tr style="height:30px;color:grey;font-size:16px;">
+                    <td style="width:200px;"><i class="fa fa-check"></i> &nbsp;&nbsp;判断题
+                    </td>
+                    <td style="margin-left:20px;">{{checkCount}}</td>
+                </tr>
+
+                <tr style="height:30px;color:grey;font-size:16px;">
+                    <td style="width:200px;"><i class="fa fa-check"></i> &nbsp;&nbsp;填空题
+                    </td>
+                    <td style="margin-left:20px;">{{completionCount}}</td>
+                </tr>
+
+                <tr style="height:30px;color:grey;font-size:16px;">
+                    <td style="width:200px;"><i class="fa fa-check"></i> &nbsp;&nbsp;单选题
+                    </td>
+                    <td style="margin-left:20px;">{{singleCount}}</td>
+                </tr>
+
+                <tr style="height:30px;color:grey;font-size:16px;">
+                    <td style="width:200px;"><i class="fa fa-check"></i> &nbsp;&nbsp;多选题
+                    </td>
+                    <td style="margin-left:20px;">{{multiCount}}</td>
+                </tr>
+
+                <tr style="height:30px;color:grey;font-size:16px;">
+                    <td style="width:200px;"><i class="fa fa-check"></i> &nbsp;&nbsp;简答题
+                    </td>
+                    <td style="margin-left:20px;">{{shortCount}}</td>
+                </tr>
+                
+                <tr style="height:30px;;color:grey;font-size:16px;">
+                    <td><i class="fa fa-eye"></i>&nbsp;&nbsp;&nbsp;密码</td>
+                    <td style="margin-left:20px;"><a ui-sref="home.changepassword"
+                                                     style="color:#00c6d8">修改</a></td>
+                </tr>
+            </table>
+            <div style="height:50px;">
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <div id="foo"></div>
+</div>

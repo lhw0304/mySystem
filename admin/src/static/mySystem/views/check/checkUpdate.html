@@ -1,0 +1,52 @@
+<toaster-container></toaster-container>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>判断题</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="home.profile">主页</a>
+            </li>
+            <li class="active">
+                <strong>判断题</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="row" ng-controller="checkUpdateCtrl">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-8">
+                	<h3>更改判断题</h3>
+                    <form method="get" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-8">
+                                <p>内容:</p>
+                                <textarea type="text" class="form-control required" ng-model="content" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div >
+                                <p>答案:</p>
+                                <input type="radio" name="answer"  ng-model="check" value="1"><label>正确</label>
+                                <input type="radio" name="answer"  ng-model="check" value="0"><label>错误</label>
+                            </div>
+                        </div>
+                        <div class="form-group" style="height:30px;"> </div>
+                    </form>
+                </div>
+                <div class="col-lg-3"></div>
+            </div>
+            <div class="ibox-content row">
+                <div class="form-group" style="height:50px;">  </div>
+                <div style="text-align:center">
+                    <button class="btn btn-primary" id="submit" ng-click="updateCheck()" style="display:inline">提交
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

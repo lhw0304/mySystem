@@ -1,0 +1,174 @@
+<toaster-container></toaster-container>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>试卷合成</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="home.profile">主页</a>
+            </li>
+            <li class="active">
+                <strong>试卷合成</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="row" ng-controller="groupCtrl">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                	<h3>输入题型的数量：</h3>
+                    <form method="get" class="form-horizontal">
+                        <div class="col-sm-2">
+                            <label>判断:</label>
+                            <input type="text" class="form-control required" ng-model="check" required/>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>填空:</label>
+                            <input type="text" class="form-control required" ng-model="completion" required/>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>单选:</label>
+                            <input type="text" class="form-control required" ng-model="single" required/>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>多选:</label>
+                            <input type="text" class="form-control required" ng-model="multi" required/>
+                        </div>
+                        <div class="col-sm-2">
+                            <label>简答:</label>
+                            <input type="text" class="form-control required" ng-model="short" required/>
+                        </div>
+                        <div class="form-group" style="height:30px;"> </div>
+                    </form>
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
+            <div class="ibox-content row">
+                <div class="form-group" style="height:50px;">  </div>
+                <div style="text-align:center">
+                    <button class="btn btn-primary" id="submit" ng-click="createGroup()" style="display:inline">提交
+                    </button>
+                </div>
+            </div>
+            <div class="ibox-content row">
+            	<div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                	<h3>判断题：</h3>
+                    <div ng-repeat="x in checkList" class="row">
+                    	<div class="col-md-1">({{$index+1}}) </div>
+                    	<div class="col-md-9">{{x.content}} </div>
+                    	<div class="col-md-2"> </div>
+                    </div>
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
+            <div class="ibox-content row">
+            	<div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                	<h3>填空题：</h3>
+                    <div ng-repeat="x in completionList" class="row">
+                    	<div class="col-md-1">({{$index+1}}) </div>
+                    	<div class="col-md-9">{{x.content}} </div>
+                    	<div class="col-md-2"> </div>
+                    </div>
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
+            <div class="ibox-content row">
+            	<div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                	<h3>单项选择题：</h3>
+                    <div ng-repeat="x in singleSelectList" class="row">
+                    	<div class="col-md-1">({{$index+1}}) </div>
+                    	<div class="col-md-9"><p>{{x.content}} </p>
+                    		<div class="row">
+                    			<div class="col-md-3">{{x.a}}</div>
+                    			<div class="col-md-3">{{x.b}}</div>
+                    			<div class="col-md-3">{{x.c}}</div>
+                    			<div class="col-md-3">{{x.d}}</div>
+                    		</div>
+                    	</div>
+                    	<div class="col-md-2"> </div>
+                    </div>
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
+            <div class="ibox-content row">
+            	<div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                	<h3>多项选择题：</h3>
+                    <div ng-repeat="x in multiSelectList" class="row">
+                    	<div class="col-md-1">({{$index+1}}) </div>
+                    	<div class="col-md-9"><p>{{x.content}} </p>
+                    		<div class="row">
+                    			<div class="col-md-3">{{x.a}}</div>
+                    			<div class="col-md-3">{{x.b}}</div>
+                    			<div class="col-md-3">{{x.c}}</div>
+                    			<div class="col-md-3">{{x.d}}</div>
+                    		</div>
+                    	</div>
+                    	<div class="col-md-2"> </div>
+                    </div>
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
+            <div class="ibox-content row">
+            	<div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                	<h3>简答题：</h3>
+                    <div ng-repeat="x in shortAnswerList" class="row">
+                    	<div class="col-md-1">({{$index+1}}) </div>
+                    	<div class="col-md-9"><p>{{x.content}} </p>
+                    	</div>
+                    	<div class="col-md-2"> </div>
+                    </div>
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
+            <div class="ibox-content row">
+            	<div class="col-lg-1"></div>
+                <div class="col-lg-10 row">
+                	<h3 class="col-md-2">答案：</h3>
+                	<div class="col-md-8">
+                		<div class="row">
+                			<h4>判断题：</h4>
+                			<div class="col-md-2" ng-repeat="x in checkList">
+                				({{$index+1}}) {{x.answer}}
+                			</div>
+                		</div>
+                		<div class="row">
+                			<h4>填空题：</h4>
+                			<div class="col-md-2" ng-repeat="x in completionList">
+                				({{$index+1}}) {{x.answer}}
+                			</div>
+                		</div>
+                		<div class="row">
+                			<h4>单项选择题：</h4>
+                			<div class="col-md-2" ng-repeat="x in singleSelectList">
+                				({{$index+1}}) {{x.answer}}
+                			</div>
+                		</div>
+                		<div class="row">
+                			<h4>多项选择题：</h4>
+                			<div class="col-md-2" ng-repeat="x in multiSelectList">
+                				({{$index+1}}) {{x.answer}}
+                			</div>
+                		</div>
+                		<div class="row">
+                			<h4>简答题：</h4>
+                			<div class="col-md-12" ng-repeat="x in shortAnswerList">
+                				({{$index+1}}) {{x.answer}}
+                			</div>
+                		</div>
+                	</div>
+                	<div class="col-md-2"></div>
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
+        </div>
+    </div>
+</div>

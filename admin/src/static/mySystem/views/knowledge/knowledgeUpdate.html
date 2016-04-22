@@ -1,0 +1,46 @@
+<toaster-container></toaster-container>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>知识点</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="home.profile">主页</a>
+            </li>
+            <li class="active">
+                <strong>知识点</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="row" ng-controller="knowledgeUpdateCtrl">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-8">
+                	<h3>更新知识点</h3>
+                    <form method="get" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-8">
+                                <p>知识点:</p>
+                                <textarea type="text" class="form-control required" ng-model="knowledge" required></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group" style="height:30px;"> </div>
+                    </form>
+                </div>
+                <div class="col-lg-3"></div>
+            </div>
+            <div class="ibox-content row">
+                <div class="form-group" style="height:50px;">  </div>
+                <div style="text-align:center">
+                    <button class="btn btn-primary" id="submit" ng-click="updateKnowledge()" style="display:inline">提交
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

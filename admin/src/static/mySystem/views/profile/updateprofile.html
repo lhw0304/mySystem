@@ -1,0 +1,67 @@
+<toaster-container></toaster-container>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <h2>个人信息 </h2>
+        <ol class="breadcrumb">
+            <li>
+                <a ui-sref="home.profile">主页</a>
+            </li>
+            <li class="active">
+                <strong>个人信息 </strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight" ng-controller="updateProfileCtrl">
+
+
+    <div class="row m-b-lg m-t-lg">
+        <div class="col-md-1"></div>
+        <div class="col-md-6">
+            <div class="profile-info">
+                <div class="">
+                    <div>
+                        <input type="text" ng-model="nickname">
+                        <h4></h4>
+                        <textarea maxlength="255" type="text" id="description"
+                                  style="max-height:100px; min-height:100px; height:100px; max-width:100%; min-width:50%; width:80%;"
+                                  ng-model="description"></textarea><span>&nbsp;&nbsp;{{description.length + num}}/255</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+           
+        </div>
+        <div class="col-md-2">
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+
+            <div style="margin-top:15px;height:120px;background-color:;">
+                <button class="btn btn-primary" id="submit" ng-click="updateProfile()"
+                        style="display:inline">更新
+                </button>
+                <button class="btn btn-primary" id="submitSuccess" ng-click="updateProfile()"
+                        style="display:none">更新<i class="fa fa-check"></i></button>
+                <button class="btn btn-primary" id="submitSpinner" ng-click="updateProfile()"
+                        style="display:none">更新<i class="fa fa-spinner"></i></button>
+                <button class="btn btn-primary" id="submitError" ng-click="updateProfile()"
+                        style="display:none">更新<i class="fa fa-times"></i></button>
+                <a ui-sref="home.profile" class="btn btn-primary" style="margin-left:50px;">返回</a>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>

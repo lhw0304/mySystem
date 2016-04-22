@@ -1,0 +1,27 @@
+@font-face {
+	font-family: 'proximaNovaRegular';
+	src: url('../fonts/ProximaNova-Regular.otf');	
+} 
+@font-face {
+	font-family: 'proximaNovaBold';
+	src: url('fonts/ProximaNova-Bold.otf');	
+} 
+@font-face {
+	font-family: 'proximaNovaSemibold';
+	src: url('../fonts/ProximaNova-Semibold.otf');	
+}
+@font-face {
+	font-family: 'proximaNovaRegItalic';
+	src: url('../fonts/ProximaNova-RegItalic.otf');	
+}
+@font-face {
+	font-family: 'proximaNovaRegularItalic';
+	src: url('../fonts/ProximaNova-RegularItalic.otf');	
+}
+@font-face {
+	font-family: 'proximaNovaSemiboldItalic';
+	src: url('../fonts/ProximaNova-SemiboldItalic.otf');	
+}
+.removeLabelBottom {
+	margin-bottom: 0px;
+}

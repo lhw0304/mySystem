@@ -1,0 +1,86 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul side-navigation class="nav metismenu" id="side-menu">
+
+            <li ng-class="{active: $state.includes('home')}"><a ui-sref="home.profile">
+                <i class="fa fa-pencil" style="width:30px;"></i><span
+                    class="nav-label" style="text-align:left">个人信息</span></a>
+            </li>
+            <li ng-class="{active: $state.includes('knowledge')}">
+                <a href=""><i class="fa fa-tag" style="width:30px;"></i><span
+                        class="nav-label" style="text-align:left">知识点</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('knowledge')}">
+                    <li ui-sref-active="active"><a ui-sref="knowledge.upload">上传知识点</a></li>
+                    <li ui-sref-active="active"><a ui-sref="knowledge.list">知识点列表</a></li>
+                </ul>
+            </li>
+            <li ng-class="{active: $state.includes('check')}">
+                <a href=""><i class="fa fa-tag" style="width:30px;"></i><span
+                        class="nav-label" style="text-align:left">判断题</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('check')}">
+                    <li ui-sref-active="active"><a ui-sref="check.upload">上传判断题</a></li>
+                    <li ui-sref-active="active"><a ui-sref="check.list">判断题列表</a></li>
+                </ul>
+            </li>
+
+            <li ng-class="{active: $state.includes('completion')}">
+                <a href=""><i class="fa fa-tag" style="width:30px;"></i><span
+                        class="nav-label" style="text-align:left">填空题</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('completion')}">
+                    <li ui-sref-active="active"><a ui-sref="completion.upload">上传填空题</a></li>
+                    <li ui-sref-active="active"><a ui-sref="completion.list">填空题列表</a></li>
+                </ul>
+            </li>
+
+            <li ng-class="{active: $state.includes('single')}">
+                <a href=""><i class="fa fa-tag" style="width:30px;"></i><span
+                        class="nav-label" style="text-align:left">单选题</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('single')}">
+                    <li ui-sref-active="active"><a ui-sref="single.upload">上传单选题</a></li>
+                    <li ui-sref-active="active"><a ui-sref="single.list">单选题列表</a></li>
+                </ul>
+            </li>
+
+            <li ng-class="{active: $state.includes('multi')}">
+                <a href=""><i class="fa fa-tag" style="width:30px;"></i><span
+                        class="nav-label" style="text-align:left">多选题</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('multi')}">
+                    <li ui-sref-active="active"><a ui-sref="multi.upload">上传多选题</a></li>
+                    <li ui-sref-active="active"><a ui-sref="multi.list">多选题列表</a></li>
+                </ul>
+            </li>
+
+            <li ng-class="{active: $state.includes('short')}">
+                <a href=""><i class="fa fa-tag" style="width:30px;"></i><span
+                        class="nav-label" style="text-align:left">简答题</span><span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" ng-class="{in: $state.includes('short')}">
+                    <li ui-sref-active="active"><a ui-sref="short.upload">上传简答题</a></li>
+                    <li ui-sref-active="active"><a ui-sref="short.list">简答题列表</a></li>
+                </ul>
+            </li>
+
+            <li ng-class="{active: $state.includes('group')}"><a ui-sref="group.create">
+                <i class="fa fa-th-list" style="width:30px;"></i><span
+                    class="nav-label" style="text-align:left">组成试卷</span></a>
+            </li>
+
+            <li ng-class="{active: $state.includes('information')}">
+                <a href="index.html"><i
+                        class="fa fa-question-circle" style="width:30px;"></i><span
+                        class="nav-label" style="text-align:left">FAQ</span> <span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level "
+                    ng-class="{in: $state.includes('information')}">
+                    <li ui-sref-active="active"><a ui-sref="information.faq">FAQ</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+</nav>
