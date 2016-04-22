@@ -16,9 +16,9 @@ public class Profile {
 
     private String gender;
 
-    private long ctime;
+    private Long ctime;
 
-    private long utime;
+    private Long utime;
 
     private String role;
 

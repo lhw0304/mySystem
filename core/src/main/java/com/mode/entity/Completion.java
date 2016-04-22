@@ -14,7 +14,7 @@ public class Completion {
 
     private String knowledge;
 
-    private long ctime;
+    private Long ctime;
 
     public Integer getId() {
         return id;

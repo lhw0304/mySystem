@@ -14,7 +14,7 @@ public class Check {
 
     private String knowledge;
 
-    private long ctime;
+    private Long ctime;
 
     public Integer getUserId() {
         return userId;

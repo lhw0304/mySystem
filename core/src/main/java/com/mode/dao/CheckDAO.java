@@ -54,7 +54,6 @@ public interface CheckDAO {
             "<set>",
             "<if test='content != null'>content = #{content},</if>",
             "<if test='answer != null'>answer = #{answer},</if>",
-            "<if test='ctime != null'>ctime = #{ctime},</if>",
             "</set>",
             "WHERE id = #{id}",
             "</script>"})

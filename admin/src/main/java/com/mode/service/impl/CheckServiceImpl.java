@@ -116,6 +116,7 @@ public class CheckServiceImpl implements CheckService{
             String content = mRequest.getParameter("content");
             check.setContent(content);
             check.setAnswer(answer);
+            check.setId(id);
             Integer success = checkDAO.updateCheck(check);
             if (success == 0) {
                 res.setMessage(Message.DATABASE);
